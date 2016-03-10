@@ -20,7 +20,7 @@ The instructions for setting up each app can be found in the readme in its subdi
 
 ### Blog
 
-We have all kinds of Android content on our blog that explores deeper aspects of the Creative SDK. Have a look at [our Android category on blog.creativesdk.com](http://blog.creativesdk.com).
+We have all kinds of Android content on our blog that explores deeper aspects of the Creative SDK. Have a look at [our Android category on blog.creativesdk.com](https://blog.creativesdk.com/category/android/).
 
 ## Contributing to this repo
 
