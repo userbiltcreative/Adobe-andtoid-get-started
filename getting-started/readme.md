@@ -15,8 +15,6 @@ Just follow the steps below.
 ### In your local development environment
 
 1. `git clone` the repo
-    ![](https://github.com/ashryanbeats/CSDKBase/blob/screenshots/screenshots/add-creativesdk-repo.png)
-
 1. Add a new Java class called `Keys` with this code:  
 
 	```
