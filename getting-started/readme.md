@@ -14,7 +14,8 @@ Just follow the steps below.
 
 ### In your local development environment
 
-1. `git clone` the repo
+1. `git clone` [the parent repo](https://github.com/CreativeSDK/android-getting-started-samples)
+1. Open the repo's `getting-started` subdirectory in Android Studio
 1. Add a new Java class called `Keys` with this code:  
 
 	```
@@ -28,4 +29,5 @@ Just follow the steps below.
 
     1. Add your Client ID and Secret to the `Keys` class
     1. This class is gitignored so you can avoid exposing your keys in GitHub
-1. Sync your Gradle files and run the app
+1. Sync your Gradle files
+1. Run the app
