@@ -48,6 +48,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /* Handle the results */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+
+                /* Make a case for the request code we passed to startActivityForResult() */
+                case 1:
+
+                    /* Show the image! */
+                    Uri editedImageUri = data.getData();
+                    mEditedImageView.setImageURI(editedImageUri);
+
+                    break;
+            }
+        }
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
