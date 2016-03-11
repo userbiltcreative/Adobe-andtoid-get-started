@@ -1,6 +1,6 @@
 # Android: Getting Started
 
-This repo accompanies [the Creative SDK Getting Started guide for Android](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html).
+This repo accompanies [the Creative SDK Image Editor UI guide for Android](https://creativesdk.adobe.com/docs/android/#/articles/imageediting/index.html).
 
 
 ## How to use
@@ -15,7 +15,7 @@ Just follow the steps below.
 ### In your local development environment
 
 1. `git clone` [the parent repo](https://github.com/CreativeSDK/android-getting-started-samples)
-1. Open the repo's `getting-started` subdirectory in Android Studio
+1. Open the repo's `image-editor-ui` subdirectory in Android Studio
 1. Add a new Java class called `Keys` with this code:  
 
 	```
