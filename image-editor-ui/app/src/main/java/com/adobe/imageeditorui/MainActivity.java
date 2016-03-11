@@ -10,10 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.adobe.creativesdk.aviary.AdobeImageIntent;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ImageView mEditedImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mEditedImageView = (ImageView) findViewById(R.id.editedImageView);
 
         /* 1) Make a new Uri object (Replace this with a real image on your device) */
         Uri imageUri = Uri.parse("content://media/external/images/media/1248");
