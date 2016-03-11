@@ -24,7 +24,7 @@
             android:name="com.adobe.creativesdk.aviary.internal.cds.CdsProvider"
             android:authorities="${applicationId}.CdsProvider"
             android:exported="false" />
-        
+
     </application>
 
 </manifest>
