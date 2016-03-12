@@ -1,8 +1,10 @@
 package com.adobe.sendtodesktopapi;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +15,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionLauncher;
 import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
+import com.adobe.creativesdk.foundation.sendtodesktop.AdobeCreativeCloudApplication;
+import com.adobe.creativesdk.foundation.sendtodesktop.AdobeSendToDesktopApplication;
+import com.adobe.creativesdk.foundation.sendtodesktop.AdobeSendToDesktopException;
+import com.adobe.creativesdk.foundation.sendtodesktop.IAdobeSendToDesktopCallBack;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,6 +107,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void sendToDesktop() throws IOException {
+        /* 1) Get the image Bitmap */
+        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedImageUri);
+
+        /* 2) Specify the Adobe desktop app to send to */
+        AdobeCreativeCloudApplication creativeCloudApplication = AdobeCreativeCloudApplication.AdobePhotoshopCreativeCloud;
+
+        /* 3) Make a callback to handle success and error */
+        final IAdobeSendToDesktopCallBack sendToDesktopCallBack = new IAdobeSendToDesktopCallBack() {
+            @Override
+            public void onSuccess() {
+                // Success case example
+                Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(AdobeSendToDesktopException e) {
+                // Error case example
+                Toast.makeText(MainActivity.this, "Failed!", Toast.LENGTH_LONG).show();
+
+                e.printStackTrace();
+            }
+        };
+
+        /* 4) Send the image to the desktop! */
+        AdobeSendToDesktopApplication.sendImage(bitmap, creativeCloudApplication, "My image title", sendToDesktopCallBack);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -137,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
             mSelectedImageUri = data.getData();
             mSelectedImageView.setImageURI(mSelectedImageUri);
-            
+
         }
     }
 
