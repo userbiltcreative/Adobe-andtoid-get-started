@@ -108,10 +108,16 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener sendToPhotoshopButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    sendToDesktop();
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                if (mSelectedImageUri != null) {
+                    try {
+                        sendToDesktop();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
                 }
             }
         };
