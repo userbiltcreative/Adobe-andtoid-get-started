@@ -5,11 +5,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
+import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
+import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionLauncher;
+import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
 
 public class MainActivity extends AppCompatActivity {
+
+    private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
+    private AdobeAuthSessionHelper mAuthSessionHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuthSessionHelper = new AdobeAuthSessionHelper(mStatusCallback);
+        mAuthSessionHelper.onCreate(savedInstanceState);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -26,6 +38,38 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private AdobeAuthSessionHelper.IAdobeAuthStatusCallback mStatusCallback;
+    {
+        mStatusCallback = new AdobeAuthSessionHelper.IAdobeAuthStatusCallback() {
+            @Override
+            public void call(AdobeAuthSessionHelper.AdobeAuthStatus adobeAuthStatus, AdobeAuthException e) {
+                if (AdobeAuthSessionHelper.AdobeAuthStatus.AdobeAuthLoggedIn == adobeAuthStatus) {
+
+                    showAuthenticatedUI();
+
+                } else {
+
+                    showAdobeLoginUI();
+
+                }
+            }
+        };
+    }
+
+    private void showAdobeLoginUI() {
+        mUXAuthManager.login(new AdobeAuthSessionLauncher.Builder()
+                        .withActivity(this)
+                        .withRequestCode(200) // Can be any int
+                        .build()
+        );
+    }
+
+    private void showAuthenticatedUI() {
+
+        Log.i(MainActivity.class.getSimpleName(), "User is logged in!");
+
     }
 
     @Override
