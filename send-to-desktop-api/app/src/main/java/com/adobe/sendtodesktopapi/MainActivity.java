@@ -84,6 +84,18 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(MainActivity.class.getSimpleName(), "User is logged in!");
 
+        View.OnClickListener mOpenGalleryButtonListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryPickerIntent = new Intent();
+                galleryPickerIntent.setType("image/*");
+                galleryPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(galleryPickerIntent, "Select an Image"), 203);
+            }
+        };
+        mOpenGalleryButton.setOnClickListener(mOpenGalleryButtonListener);
+
     }
 
     @Override
