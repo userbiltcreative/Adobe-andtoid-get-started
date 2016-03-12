@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
@@ -21,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
 
+    private Button mOpenGalleryButton;
+    private Button mSendToPhotoshopButton;
+    private ImageView mSelectedImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
         mAuthSessionHelper = new AdobeAuthSessionHelper(mStatusCallback);
         mAuthSessionHelper.onCreate(savedInstanceState);
+
+        mOpenGalleryButton = (Button) findViewById(R.id.openGalleryButton);
+        mSendToPhotoshopButton = (Button) findViewById(R.id.sendToPhotoshopButton);
+        mSelectedImageView = (ImageView) findViewById(R.id.selectedImageView);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
