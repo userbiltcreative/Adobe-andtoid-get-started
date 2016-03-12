@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
@@ -192,6 +193,10 @@ public class MainActivity extends AppCompatActivity {
                         AdobePhotoAsset photoAsset = ((AdobeSelectionPhotoAsset) selection).getSelectedItem();
                         Map<String, AdobePhotoAssetRendition> renditionMap = photoAsset.getRenditions();
                         photoAsset.downloadRendition(renditionMap.get(AdobePhotoAsset.AdobePhotoAssetRenditionImage2048), downloadCallBack);
+                    }
+
+                    else {
+                        Toast.makeText(MainActivity.this, "Please choose a Lightroom Photo", Toast.LENGTH_LONG).show();
                     }
 
                     break;
