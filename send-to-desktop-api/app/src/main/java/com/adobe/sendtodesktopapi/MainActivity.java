@@ -1,6 +1,7 @@
 package com.adobe.sendtodesktopapi;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mOpenGalleryButton;
     private Button mSendToPhotoshopButton;
     private ImageView mSelectedImageView;
+
+    private Uri mSelectedImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
