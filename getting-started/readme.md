@@ -1,4 +1,4 @@
-# Android: Getting Started
+# Android: User Auth UI
 
 This repo accompanies [the Creative SDK Getting Started guide for Android](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html).
 
