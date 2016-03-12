@@ -11,8 +11,8 @@ import com.adobe.creativesdk.foundation.auth.IAdobeAuthClientCredentials;
 public class MainApplication extends Application implements IAdobeAuthClientCredentials {
 
     /* Be sure to fill in the two strings below. */
-    private static final String CREATIVE_SDK_CLIENT_ID = "<YOUR_CLIENT_ID_HERE>";
-    private static final String CREATIVE_SDK_CLIENT_SECRET = "<YOUR_CLIENT_SECRET_HERE>";
+    private static final String CREATIVE_SDK_CLIENT_ID = Keys.CSDK_CLIENT_ID;
+    private static final String CREATIVE_SDK_CLIENT_SECRET = Keys.CSDK_CLIENT_SECRET;
 
     @Override
     public void onCreate() {
