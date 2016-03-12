@@ -1,5 +1,6 @@
 package com.adobe.sendtodesktopapi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -70,6 +71,42 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(MainActivity.class.getSimpleName(), "User is logged in!");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuthSessionHelper.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAuthSessionHelper.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuthSessionHelper.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuthSessionHelper.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAuthSessionHelper.onDestroy();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mAuthSessionHelper.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
