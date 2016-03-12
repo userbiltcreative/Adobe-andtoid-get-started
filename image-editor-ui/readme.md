@@ -1,4 +1,4 @@
-# Android: Getting Started
+# Android: Image Editor UI
 
 This repo accompanies [the Creative SDK Image Editor UI guide for Android](https://creativesdk.adobe.com/docs/android/#/articles/imageediting/index.html).
 
@@ -22,7 +22,7 @@ Just follow the steps below.
 	public class Keys {
 
 	    public static final String CSDK_CLIENT_ID = "<YOUR_ID_HERE>";
-	    public static final String CSDK_CLIENT_SECRET = "<YOU_SECRET_HERE>";
+	    public static final String CSDK_CLIENT_SECRET = "<YOUR_SECRET_HERE>";
 
 	}
 	```
