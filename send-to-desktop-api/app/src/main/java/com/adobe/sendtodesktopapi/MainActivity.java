@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(MainActivity.class.getSimpleName(), "User is logged in!");
 
-        View.OnClickListener mOpenGalleryButtonListener = new View.OnClickListener() {
+        View.OnClickListener openGalleryButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryPickerIntent = new Intent();
@@ -103,7 +103,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(galleryPickerIntent, "Select an Image"), 203); // Can be any int
             }
         };
-        mOpenGalleryButton.setOnClickListener(mOpenGalleryButtonListener);
+        mOpenGalleryButton.setOnClickListener(openGalleryButtonListener);
+
+        View.OnClickListener sendToPhotoshopButtonListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    sendToDesktop();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        mSendToPhotoshopButton.setOnClickListener(sendToPhotoshopButtonListener);
 
     }
 
