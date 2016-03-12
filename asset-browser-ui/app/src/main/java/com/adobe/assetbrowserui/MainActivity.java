@@ -1,6 +1,8 @@
 package com.adobe.assetbrowserui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,7 +19,18 @@ import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionLauncher;
 import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
 import com.adobe.creativesdk.foundation.internal.utils.AdobeCSDKException;
+import com.adobe.creativesdk.foundation.storage.AdobePhotoAsset;
+import com.adobe.creativesdk.foundation.storage.AdobePhotoAssetRendition;
+import com.adobe.creativesdk.foundation.storage.AdobePhotoException;
+import com.adobe.creativesdk.foundation.storage.AdobeSelection;
+import com.adobe.creativesdk.foundation.storage.AdobeSelectionPhotoAsset;
 import com.adobe.creativesdk.foundation.storage.AdobeUXAssetBrowser;
+import com.adobe.creativesdk.foundation.storage.IAdobeGenericRequestCallback;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -132,6 +145,55 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mAuthSessionHelper.onActivityResult(requestCode, resultCode, data);
+
+        if (data != null && resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 300: // The request code we used in launchAssetBrowser()
+
+                    /* 1) */
+                    AdobeUXAssetBrowser.ResultProvider assetBrowserResult = new AdobeUXAssetBrowser.ResultProvider(data);
+                    ArrayList listOfSelectedAssetFiles = assetBrowserResult.getSelectionAssetArray();
+                    AdobeSelection selection = (AdobeSelection) listOfSelectedAssetFiles.get(0);
+
+                    /* 2) */
+                    if (selection instanceof AdobeSelectionPhotoAsset) {
+
+                        /* 3) */
+                        IAdobeGenericRequestCallback<byte[], AdobePhotoException> downloadCallBack = new IAdobeGenericRequestCallback<byte[], AdobePhotoException>() {
+                            @Override
+                            public void onCancellation() {
+                                /* 3.a) Cancellation code here */
+                            }
+
+                            @Override
+                            public void onCompletion(byte[] bytes) {
+
+                                /* 3.b) */
+                                InputStream inputStream = new ByteArrayInputStream(bytes);
+                                Bitmap image = BitmapFactory.decodeStream(inputStream);
+                                mSelectedAssetImageView.setImageBitmap(image);
+                            }
+
+                            @Override
+                            public void onError(AdobePhotoException e) {
+                                /* 3.c) Error handler here */
+                            }
+
+                            @Override
+                            public void onProgress(double v) {
+                                /* 3.d) Code for indicating download progress here */
+                            }
+                        };
+
+                /* 4) */
+                        AdobePhotoAsset photoAsset = ((AdobeSelectionPhotoAsset) selection).getSelectedItem();
+                        Map<String, AdobePhotoAssetRendition> renditionMap = photoAsset.getRenditions();
+                        photoAsset.downloadRendition(renditionMap.get(AdobePhotoAsset.AdobePhotoAssetRenditionImage2048), downloadCallBack);
+                    }
+
+                    break;
+            }
+        }
     }
 
     @Override
