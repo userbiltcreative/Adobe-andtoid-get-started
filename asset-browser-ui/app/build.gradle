@@ -46,4 +46,5 @@ dependencies {
 
     /* 4) Add the CSDK framework dependencies (Make sure these version numbers are correct) */
     compile 'com.adobe.creativesdk.foundation:auth:0.9.7'
+    compile 'com.adobe.creativesdk.foundation:assetux:0.9.7'
 }
