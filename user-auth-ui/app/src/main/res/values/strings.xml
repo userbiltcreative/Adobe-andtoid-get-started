@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">User Auth UI</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout">Log Out</string>
 </resources>
