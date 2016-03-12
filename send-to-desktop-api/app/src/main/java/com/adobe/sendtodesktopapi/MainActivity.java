@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 galleryPickerIntent.setType("image/*");
                 galleryPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-                startActivityForResult(Intent.createChooser(galleryPickerIntent, "Select an Image"), 203);
+                startActivityForResult(Intent.createChooser(galleryPickerIntent, "Select an Image"), 203); // Can be any int
             }
         };
         mOpenGalleryButton.setOnClickListener(mOpenGalleryButtonListener);
@@ -132,6 +132,13 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mAuthSessionHelper.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 203) { // the int we used for startActivityForResult()
+
+            mSelectedImageUri = data.getData();
+            mSelectedImageView.setImageURI(mSelectedImageUri);
+            
+        }
     }
 
     @Override
