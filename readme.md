@@ -30,6 +30,6 @@ If you want to do a pull request, please get in touch with us before you start w
 
 ## Get help
 
-[Our growing community on Stackover is a great way to get help](https://stackoverflow.com/questions/tagged/adobecreativesdk). Just post your question and tag it with `adobecreativesdk`.
+[Our growing community on Stackoverflow is a great way to get help](https://stackoverflow.com/questions/tagged/adobecreativesdk). Just post your question and tag it with `adobecreativesdk`.
 
 If you have feedback on this repo, submit a GitHub issue.
