@@ -10,13 +10,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionLauncher;
 import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
+import com.adobe.creativesdk.foundation.internal.utils.AdobeCSDKException;
+import com.adobe.creativesdk.foundation.storage.AdobeUXAssetBrowser;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button mLaunchAssetBrowserButton;
 
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
@@ -31,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
         mAuthSessionHelper = new AdobeAuthSessionHelper(mStatusCallback);
         mAuthSessionHelper.onCreate(savedInstanceState);
 
+        mLaunchAssetBrowserButton = (Button) findViewById(R.id.launchAssetBrowserButton);
+
+        View.OnClickListener mLaunchAssetBrowserButtonListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchAssetBrowser();
+            }
+        };
+        mLaunchAssetBrowserButton.setOnClickListener(mLaunchAssetBrowserButtonListener);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +54,17 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void launchAssetBrowser() {
+        AdobeUXAssetBrowser assetBrowser = AdobeUXAssetBrowser.getSharedInstance();
+
+        try {
+            assetBrowser.popupFileBrowser(this, 300); // Can be any int
+        }
+        catch (AdobeCSDKException e) {
+            Log.e(MainActivity.class.getSimpleName(), "Error: " + e.getMessage());
+        }
     }
 
     private AdobeAuthSessionHelper.IAdobeAuthStatusCallback mStatusCallback;
