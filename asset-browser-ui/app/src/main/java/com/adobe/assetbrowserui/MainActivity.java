@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private Button mLaunchAssetBrowserButton;
+    private ImageView mSelectedAssetImageView;
 
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mAuthSessionHelper.onCreate(savedInstanceState);
 
         mLaunchAssetBrowserButton = (Button) findViewById(R.id.launchAssetBrowserButton);
+        mSelectedAssetImageView = (ImageView) findViewById(R.id.selectedAssetImageView);
 
         View.OnClickListener mLaunchAssetBrowserButtonListener = new View.OnClickListener() {
             @Override
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         };
 
-                /* 4) */
+                        /* 4) */
                         AdobePhotoAsset photoAsset = ((AdobeSelectionPhotoAsset) selection).getSelectedItem();
                         Map<String, AdobePhotoAssetRendition> renditionMap = photoAsset.getRenditions();
                         photoAsset.downloadRendition(renditionMap.get(AdobePhotoAsset.AdobePhotoAssetRenditionImage2048), downloadCallBack);
