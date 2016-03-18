@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
 
                         mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
                     }
                 }
                 else {
