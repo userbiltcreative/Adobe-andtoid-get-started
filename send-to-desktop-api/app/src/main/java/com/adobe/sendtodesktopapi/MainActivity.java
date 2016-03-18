@@ -115,20 +115,39 @@ public class MainActivity extends AppCompatActivity {
 
                 mSendToDesktopProgressBar.setVisibility(View.VISIBLE);
 
-                if (mSelectedImageUri != null) {
-                    try {
-                        sendToDesktop();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
 
-                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
+                        if (mSelectedImageUri != null) {
+                            try {
+                                sendToDesktop();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                                        Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                            }
+                        }
+                        else {
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+
                     }
-                }
-                else {
-                    mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
-                }
+                }).start();
             }
         };
         mSendToPhotoshopButton.setOnClickListener(sendToPhotoshopButtonListener);
@@ -147,16 +166,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 // Success case example
-                mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
             public void onError(AdobeSendToDesktopException e) {
                 // Error case example
-                Toast.makeText(MainActivity.this, "Failed!", Toast.LENGTH_LONG).show();
-
                 e.printStackTrace();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Couldn't send to Photoshop. Please try again.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         };
 
