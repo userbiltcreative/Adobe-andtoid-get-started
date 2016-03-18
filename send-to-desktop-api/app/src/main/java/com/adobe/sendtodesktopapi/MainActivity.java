@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mOpenGalleryButton;
     private Button mSendToPhotoshopButton;
     private ImageView mSelectedImageView;
+    private ProgressBar mSendToDesktopProgressBar;
 
     private Uri mSelectedImageUri;
 
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         mOpenGalleryButton = (Button) findViewById(R.id.openGalleryButton);
         mSendToPhotoshopButton = (Button) findViewById(R.id.sendToPhotoshopButton);
         mSelectedImageView = (ImageView) findViewById(R.id.selectedImageView);
+        mSendToDesktopProgressBar = (ProgressBar) findViewById(R.id.sendToDesktopProgressBar);
+        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
