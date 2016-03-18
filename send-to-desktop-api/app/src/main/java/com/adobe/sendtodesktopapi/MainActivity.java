@@ -113,14 +113,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                mSendToDesktopProgressBar.setVisibility(View.VISIBLE);
+
                 if (mSelectedImageUri != null) {
                     try {
                         sendToDesktop();
                     } catch (IOException e) {
                         e.printStackTrace();
+
+                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
                     }
                 }
                 else {
+                    mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
                 }
             }
@@ -141,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 // Success case example
+                mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
             }
 
