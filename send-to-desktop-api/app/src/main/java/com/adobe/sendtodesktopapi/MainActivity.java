@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mOpenGalleryButton;
     private Button mSendToPhotoshopButton;
     private ImageView mSelectedImageView;
+    private ProgressBar mSendToDesktopProgressBar;
 
     private Uri mSelectedImageUri;
 
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         mOpenGalleryButton = (Button) findViewById(R.id.openGalleryButton);
         mSendToPhotoshopButton = (Button) findViewById(R.id.sendToPhotoshopButton);
         mSelectedImageView = (ImageView) findViewById(R.id.selectedImageView);
+        mSendToDesktopProgressBar = (ProgressBar) findViewById(R.id.sendToDesktopProgressBar);
+        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -109,16 +113,41 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (mSelectedImageUri != null) {
-                    try {
-                        sendToDesktop();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                mSendToDesktopProgressBar.setVisibility(View.VISIBLE);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (mSelectedImageUri != null) {
+                            try {
+                                sendToDesktop();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                                        Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                            }
+                        }
+                        else {
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+
                     }
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
-                }
+                }).start();
             }
         };
         mSendToPhotoshopButton.setOnClickListener(sendToPhotoshopButtonListener);
@@ -137,15 +166,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 // Success case example
-                Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
             public void onError(AdobeSendToDesktopException e) {
                 // Error case example
-                Toast.makeText(MainActivity.this, "Failed!", Toast.LENGTH_LONG).show();
-
                 e.printStackTrace();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Couldn't send to Photoshop. Please try again.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         };
 
