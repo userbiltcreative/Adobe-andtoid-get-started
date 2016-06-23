@@ -5,7 +5,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.adobe.assetbrowserui"
@@ -45,6 +45,9 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
 
     /* 4) Add the CSDK framework dependencies (Make sure these version numbers are correct) */
-    compile 'com.adobe.creativesdk.foundation:auth:0.9.7'
+    compile('com.adobe.creativesdk.foundation:auth:0.9.978') {
+        exclude module: 'httpclient'
+        exclude module: 'httpcore'
+    }
     compile 'com.adobe.creativesdk.foundation:assetux:0.9.7'
 }
