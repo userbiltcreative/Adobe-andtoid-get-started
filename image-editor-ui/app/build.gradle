@@ -13,6 +13,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [appPackageName: "${applicationId}"]
     }
     buildTypes {
         release {
@@ -50,5 +51,6 @@ dependencies {
         exclude module: 'httpcore'
     }
 
-    compile 'com.adobe.creativesdk:image:4.4.8'
+    compile "com.adobe.creativesdk:image:4.6.3"
+    compile "com.localytics.android:library:3.8.0"
 }

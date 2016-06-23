@@ -26,6 +26,10 @@ allprojects {
         maven {
             url 'https://repo.adobe.com/nexus/content/repositories/releases/'
         }
+
+        maven {
+            url 'http://maven.localytics.com/public'
+        }
     }
 }
 
