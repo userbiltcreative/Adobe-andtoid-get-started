@@ -5,7 +5,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.adobe.gettingstarted"
@@ -42,9 +42,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
 
     /* 4) Add the CSDK framework dependencies (Make sure these version numbers are correct) */
-    compile 'com.adobe.creativesdk.foundation:auth:0.9.7'
+    compile('com.adobe.creativesdk.foundation:auth:0.9.978') {
+        exclude module: 'httpclient'
+        exclude module: 'httpcore'
+    }
 }
