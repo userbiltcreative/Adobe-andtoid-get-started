@@ -21,7 +21,6 @@ import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionLauncher;
 import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
 import com.adobe.creativesdk.foundation.sendtodesktop.AdobeCreativeCloudApplication;
-import com.adobe.creativesdk.foundation.sendtodesktop.AdobeSendToDesktopApplication;
 import com.adobe.creativesdk.foundation.sendtodesktop.AdobeSendToDesktopException;
 import com.adobe.creativesdk.foundation.sendtodesktop.IAdobeSendToDesktopCallBack;
 
@@ -104,39 +103,21 @@ public class MainActivity extends AppCompatActivity {
 
                 mSendToDesktopProgressBar.setVisibility(View.VISIBLE);
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                        if (mSelectedImageUri != null) {
-                            try {
-                                sendToDesktop();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                    if (mSelectedImageUri != null) {
+                        try {
+                            sendToDesktop();
+                        } catch (IOException e) {
+                            e.printStackTrace();
 
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                                        Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-
-                            }
+                            mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
                         }
-                        else {
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                                    Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-
                     }
-                }).start();
+                    else {
+                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
+                    }
             }
         };
         mSendToPhotoshopButton.setOnClickListener(sendToPhotoshopButtonListener);
@@ -155,32 +136,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 // Success case example
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
-                    }
-                });
+                mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(AdobeSendToDesktopException e) {
                 // Error case example
                 e.printStackTrace();
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "Couldn't send to Photoshop. Please try again.", Toast.LENGTH_LONG).show();
-                    }
-                });
+                Toast.makeText(MainActivity.this, "Couldn't send to Photoshop. Please try again.", Toast.LENGTH_LONG).show();
             }
         };
 
         /* 4) Send the image to the desktop! */
-        AdobeSendToDesktopApplication.sendImage(bitmap, creativeCloudApplication, "My image title", sendToDesktopCallBack);
+        //AdobeSendToDesktopApplication.sendImage(bitmap, creativeCloudApplication, "My image title", sendToDesktopCallBack);
     }
 
     @Override
