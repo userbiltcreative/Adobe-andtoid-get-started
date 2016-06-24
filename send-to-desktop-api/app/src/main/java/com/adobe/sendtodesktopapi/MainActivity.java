@@ -1,10 +1,8 @@
 package com.adobe.sendtodesktopapi;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,6 +19,7 @@ import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionLauncher;
 import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
 import com.adobe.creativesdk.foundation.sendtodesktop.AdobeCreativeCloudApplication;
+import com.adobe.creativesdk.foundation.sendtodesktop.AdobeSendToDesktopApplication;
 import com.adobe.creativesdk.foundation.sendtodesktop.AdobeSendToDesktopException;
 import com.adobe.creativesdk.foundation.sendtodesktop.IAdobeSendToDesktopCallBack;
 
@@ -125,31 +124,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendToDesktop() throws IOException {
-        /* 1) Get the image Bitmap */
-        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedImageUri);
 
-        /* 2) Specify the Adobe desktop app to send to */
+        /* 1) Specify the Adobe desktop app to send to */
         AdobeCreativeCloudApplication creativeCloudApplication = AdobeCreativeCloudApplication.AdobePhotoshopCreativeCloud;
 
-        /* 3) Make a callback to handle success and error */
+        /* 2) Make a callback to handle success and error */
         final IAdobeSendToDesktopCallBack sendToDesktopCallBack = new IAdobeSendToDesktopCallBack() {
             @Override
             public void onSuccess() {
-                // Success case example
                 mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(MainActivity.this, "Opening in Photoshop on your desktop!", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(AdobeSendToDesktopException e) {
-                // Error case example
                 e.printStackTrace();
-                Toast.makeText(MainActivity.this, "Couldn't send to Photoshop. Please try again.", Toast.LENGTH_LONG).show();
+                mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(MainActivity.this, "Failed! Check your internet connection.", Toast.LENGTH_LONG).show();
             }
         };
 
-        /* 4) Send the image to the desktop! */
-        //AdobeSendToDesktopApplication.sendImage(bitmap, creativeCloudApplication, "My image title", sendToDesktopCallBack);
+        /* 3) Send the image to the desktop! */
+        AdobeSendToDesktopApplication.sendToDesktop(mSelectedImageUri, "image/jpeg", creativeCloudApplication, sendToDesktopCallBack);
     }
 
     @Override
