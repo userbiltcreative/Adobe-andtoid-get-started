@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -55,16 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mSendToPhotoshopButton = (Button) findViewById(R.id.sendToPhotoshopButton);
         mSelectedImageView = (ImageView) findViewById(R.id.selectedImageView);
         mSendToDesktopProgressBar = (ProgressBar) findViewById(R.id.sendToDesktopProgressBar);
-        mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private AdobeAuthSessionHelper.IAdobeAuthStatusCallback mStatusCallback;

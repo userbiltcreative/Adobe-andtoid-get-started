@@ -47,5 +47,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/sendToDesktopProgressBar"
         android:layout_below="@+id/buttonLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 </RelativeLayout>
