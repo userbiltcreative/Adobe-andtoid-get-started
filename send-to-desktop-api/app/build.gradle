@@ -50,6 +50,9 @@ dependencies {
         exclude module: 'httpcore'
     }
 
-    compile 'com.adobe.creativesdk.foundation:assetcore:0.9.7'
+    compile("com.adobe.creativesdk.foundation:assetux:0.9.978") {
+        exclude module: 'httpclient'
+        exclude module: 'httpcore'
+    }
 
 }
