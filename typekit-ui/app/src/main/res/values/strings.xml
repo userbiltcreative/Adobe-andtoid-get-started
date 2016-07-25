@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">User Auth UI</string>
+    <string name="app_name">Typekit UI</string>
+    <string name="action_launch_typekit">Manage Typekit Synced Fonts</string>
     <string name="action_logout">Log Out</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.adobe.userauthui;
+package com.adobe.typekitui;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

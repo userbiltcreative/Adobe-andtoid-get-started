@@ -8,7 +8,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.adobe.userauthui"
+        applicationId "com.adobe.typekitui"
         minSdkVersion 16 // Minimum is 16
         targetSdkVersion 23
         versionCode 1
@@ -45,8 +45,6 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
 
     /* 4) Add the CSDK framework dependencies (Make sure these version numbers are correct) */
-    compile('com.adobe.creativesdk.foundation:auth:0.9.1010') {
-        exclude module: 'httpclient'
-        exclude module: 'httpcore'
-    }
+    compile 'com.adobe.creativesdk.foundation:auth:0.9.1062'
+    compile 'com.adobe.creativesdk:typekit:0.9.1062'
 }

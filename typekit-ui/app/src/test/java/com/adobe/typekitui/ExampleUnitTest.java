@@ -1,4 +1,4 @@
-package com.adobe.userauthui;
+package com.adobe.typekitui;
 
 import org.junit.Test;
 

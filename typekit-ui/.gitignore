@@ -6,4 +6,4 @@
 /build
 /captures
 
-app/src/main/java/com/adobe/userauthui/Keys.java
+app/src/main/java/com/adobe/typekitui/Keys.java

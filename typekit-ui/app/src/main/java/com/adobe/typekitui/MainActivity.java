@@ -1,4 +1,4 @@
-package com.adobe.userauthui;
+package com.adobe.typekitui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import com.adobe.creativesdk.foundation.auth.AdobeAuthException;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionHelper;
 import com.adobe.creativesdk.foundation.auth.AdobeAuthSessionLauncher;
 import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
+import com.adobe.creativesdk.typekit.AdobeTypekitFontBrowser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -112,6 +113,12 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_launch_typekit) {
+            AdobeTypekitFontBrowser.launchActivity(MainActivity.this);
+            return true;
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
