@@ -12,28 +12,99 @@
     tools:context="com.adobe.typekitui.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/targetTextView"
-        android:text="The quick brown fox jumps over the lazy dog"
-        android:textSize="30dp" />
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Apply a random Typekit font"
-        android:id="@+id/applyRandomFontButton"
+        android:text="Sync Typekit fonts"
+        android:id="@+id/syncTypekitFontsButton"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Select font:"
+        android:id="@+id/textView"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Random Typekit font applied:"
+        android:id="@+id/fontNameLabelTextView"
+        android:layout_below="@+id/syncTypekitFontsButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/fontNameTextView"
-        android:layout_below="@+id/applyRandomFontButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/fontNameLabelTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="(Sync Typekit fonts first)" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/targetTextView"
+        android:text="The quick brown fox jumps over the lazy dog"
+        android:textSize="30dp"
+        android:layout_below="@+id/fontNameTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fontSpinner"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Sync Typekit fonts first)"
+        android:id="@+id/targetTextView2"
+        android:layout_below="@+id/fontSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textNoSuggestions"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:id="@+id/fontEditText"
+        android:layout_below="@+id/targetTextView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/subsetFontProgressBar"
+        android:layout_below="@+id/syncTypekitFontsButton"
+        android:layout_alignRight="@+id/targetTextView"
+        android:layout_alignEnd="@+id/targetTextView"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleSmall" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/entireFontProgressBar"
+        android:layout_below="@+id/fontSpinner"
+        android:layout_alignLeft="@+id/subsetFontProgressBar"
+        android:layout_alignStart="@+id/subsetFontProgressBar"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleSmall" />
+
 </RelativeLayout>

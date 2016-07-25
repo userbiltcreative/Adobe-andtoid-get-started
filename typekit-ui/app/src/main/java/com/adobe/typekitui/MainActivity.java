@@ -1,15 +1,23 @@
 package com.adobe.typekitui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,9 +45,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
     /* Store an instance of `AdobeTypekitManager` as a member variable */
     private AdobeTypekitManager mTypekitManager = AdobeTypekitManager.getInstance();
 
-    private Button mApplyRandomFontButton;
+    private Button mSyncTypekitFontsButton;
     private TextView mTargetTextView;
     private TextView mFontNameTextView;
+    private Spinner mFontSpinner;
+    private TextView mTargetTextView2;
+    private EditText mFontEditText;
+    private ProgressBar mSubsetFontProgressBar;
+    private ProgressBar mEntireFontProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +64,59 @@ public class MainActivity extends AppCompatActivity implements Observer {
         mAuthSessionHelper = new AdobeAuthSessionHelper(mStatusCallback);
         mAuthSessionHelper.onCreate(savedInstanceState);
 
+        mSyncTypekitFontsButton = (Button) findViewById(R.id.syncTypekitFontsButton);
+        mTargetTextView = (TextView) findViewById(R.id.targetTextView);
+        mFontNameTextView = (TextView) findViewById(R.id.fontNameTextView);
+        mFontSpinner = (Spinner) findViewById(R.id.fontSpinner);
+        mTargetTextView2 = (TextView) findViewById(R.id.targetTextView2);
+        mFontEditText = (EditText) findViewById(R.id.fontEditText);
+        mSubsetFontProgressBar = (ProgressBar) findViewById(R.id.subsetFontProgressBar);
+        mEntireFontProgressBar = (ProgressBar) findViewById(R.id.entireFontProgressBar);
+
+        View.OnClickListener applyRandomFontListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSyncTypekitFontsButton.setEnabled(false);
+                mSubsetFontProgressBar.setVisibility(View.VISIBLE);
+                mEntireFontProgressBar.setVisibility(View.VISIBLE);
+                mTypekitManager.syncFonts();
+            }
+        };
+        mSyncTypekitFontsButton.setOnClickListener(applyRandomFontListener);
+
+        mFontEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(v.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+    }
+
+    private AdobeAuthSessionHelper.IAdobeAuthStatusCallback mStatusCallback;
+    {
+        mStatusCallback = new AdobeAuthSessionHelper.IAdobeAuthStatusCallback() {
+            @Override
+            public void call(AdobeAuthSessionHelper.AdobeAuthStatus adobeAuthStatus, AdobeAuthException e) {
+                if (AdobeAuthSessionHelper.AdobeAuthStatus.AdobeAuthLoggedIn == adobeAuthStatus) {
+                    initializeTypekitManager();
+                    showAuthenticatedUI();
+                } else {
+                    showAdobeLoginUI();
+                }
+            }
+        };
+    }
+
+    private void initializeTypekitManager() {
         try {
             /* Initialize the `AdobeTypekitManager` instance */
             mTypekitManager.init(this);
@@ -62,33 +128,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
             Toast.makeText(this, "Please log in to Creative Cloud to use Typekit fonts!", Toast.LENGTH_LONG).show();
         }
-
-        mApplyRandomFontButton = (Button) findViewById(R.id.applyRandomFontButton);
-        mTargetTextView = (TextView) findViewById(R.id.targetTextView);
-        mFontNameTextView = (TextView) findViewById(R.id.fontNameTextView);
-
-        View.OnClickListener applyRandomFontListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTypekitManager.syncFonts();
-            }
-        };
-        mApplyRandomFontButton.setOnClickListener(applyRandomFontListener);
-
-    }
-
-    private AdobeAuthSessionHelper.IAdobeAuthStatusCallback mStatusCallback;
-    {
-        mStatusCallback = new AdobeAuthSessionHelper.IAdobeAuthStatusCallback() {
-            @Override
-            public void call(AdobeAuthSessionHelper.AdobeAuthStatus adobeAuthStatus, AdobeAuthException e) {
-                if (AdobeAuthSessionHelper.AdobeAuthStatus.AdobeAuthLoggedIn == adobeAuthStatus) {
-                    showAuthenticatedUI();
-                } else {
-                    showAdobeLoginUI();
-                }
-            }
-        };
     }
 
     private void showAdobeLoginUI() {
@@ -154,21 +193,47 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 break;
 
             case TypekitNotification.Event.FONT_SELECTION_REFRESH:
+                Toast.makeText(MainActivity.this, "Typekit fonts synced", Toast.LENGTH_SHORT).show();
                 ArrayList<AdobeTypekitFont> syncList = AdobeTypekitFont.getFonts();
+
                 Random random = new Random();
-                applyFont(syncList.get(random.nextInt(syncList.size())));
+                applySubsetFont(syncList.get(random.nextInt(syncList.size())));
+
+                /* Set Spinner Adapter to display Typekit Synced Fonts list */
+                setSpinnerAdapter(syncList);
+
+                if (mFontSpinner != null) {
+
+                    mFontSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            applyEntireFont(syncList.get(position));
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+
+                }
+
+                mSyncTypekitFontsButton.setEnabled(true);
+
                 break;
 
             case TypekitNotification.Event.FONT_SELECTION_SYNC_ERROR:
                 Log.e(MainActivity.class.getSimpleName(), "Error: " + notification.getTypekitEvent());
+                mSyncTypekitFontsButton.setEnabled(true);
                 break;
 
             case TypekitNotification.Event.FONT_NETWORK_ERROR:
                 Log.e(MainActivity.class.getSimpleName(), "Error: " + notification.getTypekitEvent());
+                mSyncTypekitFontsButton.setEnabled(true);
                 break;
 
             case TypekitNotification.Event.FONT_CACHE_EXPIRY:
                 Log.e(MainActivity.class.getSimpleName(), "Warning: " + notification.getTypekitEvent());
+                mSyncTypekitFontsButton.setEnabled(true);
                 break;
 
             default:
@@ -176,7 +241,25 @@ public class MainActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    private void applyFont(AdobeTypekitFont adobeTypekitFont) {
+    private void setSpinnerAdapter (ArrayList<AdobeTypekitFont> syncList) {
+
+        ArrayList<String> list = new ArrayList<>();
+
+        for (AdobeTypekitFont font : syncList) {
+            list.add(font.displayName());
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mFontSpinner.setAdapter(dataAdapter);
+    }
+
+    private void applySubsetFont(AdobeTypekitFont adobeTypekitFont) {
+
+        if (mSubsetFontProgressBar.getVisibility() == View.INVISIBLE) {
+            mSubsetFontProgressBar.setVisibility(View.VISIBLE);
+        }
 
         /* Get the string you will apply the typeface to */
         String targetString = mTargetTextView.getText().toString();
@@ -185,14 +268,45 @@ public class MainActivity extends AppCompatActivity implements Observer {
         adobeTypekitFont.getSubsetTypeface(targetString, new AdobeTypekitFont.ITypekitCallback<Typeface, String>() {
             @Override
             public void onSuccess(AdobeTypekitFont adobeTypekitFont, Typeface typeface) {
+                mSubsetFontProgressBar.setVisibility(View.INVISIBLE);
 
                 /* Handle success */
                 mTargetTextView.setTypeface(typeface);
-                mFontNameTextView.setText(String.format("Font name: %s", adobeTypekitFont.displayName()));
+                mFontNameTextView.setText(adobeTypekitFont.displayName());
             }
 
             @Override
             public void onError(AdobeTypekitFont adobeTypekitFont, String s) {
+                mSubsetFontProgressBar.setVisibility(View.INVISIBLE);
+
+                /* Handle errors */
+                Log.e(MainActivity.class.getSimpleName(), s);
+            }
+        });
+    }
+
+    private void applyEntireFont(AdobeTypekitFont adobeTypekitFont) {
+
+        if (mEntireFontProgressBar.getVisibility() == View.INVISIBLE) {
+            mEntireFontProgressBar.setVisibility(View.VISIBLE);
+        }
+
+        String targetString = "You applied the selected Typekit font.";
+
+        adobeTypekitFont.getTypeface(new AdobeTypekitFont.ITypekitCallback<Typeface, String>() {
+            @Override
+            public void onSuccess(AdobeTypekitFont adobeTypekitFont, Typeface typeface) {
+                mEntireFontProgressBar.setVisibility(View.INVISIBLE);
+
+                /* Handle success */
+                mTargetTextView2.setTypeface(typeface);
+                mTargetTextView2.setText(targetString);
+                mFontEditText.setTypeface(typeface);
+            }
+
+            @Override
+            public void onError(AdobeTypekitFont adobeTypekitFont, String s) {
+                mEntireFontProgressBar.setVisibility(View.INVISIBLE);
 
                 /* Handle errors */
                 Log.e(MainActivity.class.getSimpleName(), s);
