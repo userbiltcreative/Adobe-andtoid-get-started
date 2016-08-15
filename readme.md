@@ -14,11 +14,11 @@ Stay tuned for updates as we build out this library of samples!
 <a name="how-to"></a>
 ## How to use
 
-**TL;DR: Your first step should be to check out the app subdirectory in this repo that you are interested in, and follow the instructions in that subdirectory's readme.**
+**TL;DR: Your first step should be to check out the app subdirectory in this repo that you are interested in, and follow the instructions in that subdirectory's `code/readme.md` file.**
 
-This repo contains multiple example apps. Each subdirectory in the repo is an example app that accompanies an Android developer guide on [creativesdk.com](http://creativesdk.com).
+This repo contains multiple example apps. Each subdirectory in the repo contains an example app that accompanies an Android developer guide on [creativesdk.com](http://creativesdk.com).
 
-The instructions for setting up each app can be found in the readme in its subdirectory. The subdirectory readmes also contain links to their respective developer guides, where you can get step-by-step instructions for creating the apps.
+The instructions for setting up each app can be found in the readme in its `/code` subdirectory. The subdirectory readmes also contain links to their respective developer guides, where you can get step-by-step instructions for creating the apps.
 
 <a name="resources"></a>
 ## More resources for the Creative SDK

@@ -15,7 +15,7 @@ Just follow the steps below.
 ### In your local development environment
 
 1. `git clone` [the parent repo](https://github.com/CreativeSDK/android-getting-started-samples)
-1. Open the repo's `image-editor-ui` subdirectory in Android Studio
+1. Open this subdirectory in Android Studio
 1. Add a new Java class called `Keys` with this code:  
 
 	```
