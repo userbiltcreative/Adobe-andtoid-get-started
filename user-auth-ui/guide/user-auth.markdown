@@ -4,7 +4,7 @@ Most Creative SDK components require an authenticated user. The User Auth UI com
 
 ![](https://s3.amazonaws.com/csdk-assets-aviary-prod-us-east-1/docs/android/user-auth-login.png)
 
-In this guide, we will cover how to display the Adobe ID User Auth UI component and check for an authenticated user.
+In this guide, we will cover how to display the Creative SDK User Auth UI component and check for an authenticated user.
 
 By the end of this guide, we will have an Android app that:
 
