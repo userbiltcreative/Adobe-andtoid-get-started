@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mLaunchAssetBrowserButton;
     private ImageView mSelectedAssetImageView;
-    private String downloadLocation;
 
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
@@ -184,10 +183,6 @@ public class MainActivity extends AppCompatActivity {
                                 /* 3.c) Error handler here */
                                 Log.d(TAG, "onError()");
                                 e.printStackTrace();
-                                Log.d(TAG, e.toString());
-                                Log.d(TAG, e.getDescription());
-                                //Log.d(TAG, e.getLocalizedMessage());
-                                Log.d(TAG, e.getErrorCode().toString());
                             }
 
                             @Override
@@ -203,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                         for (Map.Entry<String, AdobePhotoAssetRendition> entry : renditionMap.entrySet()) {
                             Log.d(TAG, entry.getKey());
                         }
-                        //photoAsset.downloadRendition(renditionMap.get(AdobePhotoAsset.AdobePhotoAssetRenditionImage2048), downloadCallBack);
+                        photoAsset.downloadRendition(renditionMap.get(AdobePhotoAsset.AdobePhotoAssetRenditionImage2048), downloadCallBack);
 
                         //photoAsset.downloadMasterData(downloadCallBack);
                     }
