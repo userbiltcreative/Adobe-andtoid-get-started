@@ -66,6 +66,8 @@ These steps are numbered **#1-4** in the code comments below:
 ```language-java
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
+
     /* 1 */
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
