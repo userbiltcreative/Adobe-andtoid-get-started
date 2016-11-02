@@ -28,11 +28,14 @@ import com.adobe.creativesdk.foundation.storage.AdobeUXAssetBrowser;
 import com.adobe.creativesdk.foundation.storage.IAdobeGenericRequestCallback;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    public final String TAG = MainActivity.class.getSimpleName();
 
     private Button mLaunchAssetBrowserButton;
     private ImageView mSelectedAssetImageView;
@@ -157,34 +160,48 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onCancellation() {
                                 /* 3.a) Cancellation code here */
+                                Log.d(TAG, "onCancellation()");
                             }
 
                             @Override
                             public void onCompletion(byte[] bytes) {
+                                Log.d(TAG, "onCompletion()");
 
                                 /* 3.b) */
                                 InputStream inputStream = new ByteArrayInputStream(bytes);
                                 Bitmap image = BitmapFactory.decodeStream(inputStream);
+                                try {
+                                    inputStream.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 mSelectedAssetImageView.setImageBitmap(image);
                             }
 
                             @Override
                             public void onError(AdobePhotoException e) {
                                 /* 3.c) Error handler here */
+                                Log.d(TAG, "onError()");
+                                e.printStackTrace();
                             }
 
                             @Override
                             public void onProgress(double v) {
                                 /* 3.d) Code for indicating download progress here */
+                                Log.d(TAG, "onProgress()");
                             }
                         };
 
                         /* 4) */
                         AdobePhotoAsset photoAsset = ((AdobeSelectionPhotoAsset) selection).getSelectedItem();
                         Map<String, AdobePhotoAssetRendition> renditionMap = photoAsset.getRenditions();
+                        for (Map.Entry<String, AdobePhotoAssetRendition> entry : renditionMap.entrySet()) {
+                            Log.d(TAG, entry.getKey());
+                        }
                         photoAsset.downloadRendition(renditionMap.get(AdobePhotoAsset.AdobePhotoAssetRenditionImage2048), downloadCallBack);
-                    }
 
+                        //photoAsset.downloadMasterData(downloadCallBack);
+                    }
                     else {
                         Toast.makeText(MainActivity.this, "Please choose a Lightroom Photo", Toast.LENGTH_LONG).show();
                     }
