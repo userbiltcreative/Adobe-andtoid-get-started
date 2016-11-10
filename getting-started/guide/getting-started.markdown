@@ -243,8 +243,8 @@ Articles about common issues are at [help.creativesdk.com](http://help.creatives
 ## Class Reference
 In this guide, we used the classes in the list below.
 
-- [`IAdobeAuthClientCredentials`](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/auth/IAdobeAuthClientCredentials.html)
-- [`AdobeAuthManager`](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/auth/AdobeAuthManager.html)
+- `IAdobeAuthClientCredentials`
+- `AdobeAuthManager`
 
 _**Tip:** to inspect the source code for a class or method in Android Studio, Command/Control-click the class or method name in your code._
 
@@ -270,9 +270,9 @@ You can learn more in the Creative SDK framework guides:
 
 ### Creative Cloud Content Management
 
-- [User Auth UI](https://creativesdk.adobe.com/docs/android/#/articles/userauth/index.html)
-- [Asset Browser UI](https://creativesdk.adobe.com/docs/android/#/articles/assetbrowser/index.html)
-- [TypeKit UI](https://creativesdk.adobe.com/docs/android/#/articles/typekitui/index.html)
+- User Auth UI
+- Asset Browser UI
+- TypeKit UI
 - Creative Cloud Files API (Coming Soon)
 - Lightroom Photos API (Coming Soon)
 - Creative Cloud Libraries API (Coming Soon)
@@ -280,16 +280,16 @@ You can learn more in the Creative SDK framework guides:
 
 ### Creative Tools
 
-- [Image Editor UI](https://creativesdk.adobe.com/docs/android/#/articles/imageediting/index.html)
+- Image Editor UI
 - Color UI (Coming Soon)
 
 
 ### Creative Cloud Workflows
 
-- [Send To Desktop API](https://creativesdk.adobe.com/docs/android/#/articles/sendtodesktop/index.html)
+- Send To Desktop API
 - Behance Publish UI (Coming Soon)
 
 
 ### Frameworks
 
-- [Framework Dependencies](https://creativesdk.adobe.com/docs/android/#/articles/dependencies/index.html)
+- Framework Dependencies

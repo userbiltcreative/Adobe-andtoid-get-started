@@ -36,8 +36,8 @@ Be sure to follow all instructions in the `readme`.
 ## Prerequisites
 This guide will assume that you have installed all software and completed all of the steps in the following guides:
 
-- [Getting Started](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html)
-- [User Auth UI](https://creativesdk.adobe.com/docs/android/#/articles/userauth/index.html)
+- Getting Started
+- User Auth UI
 
 _**Note:**_
 
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     // ...
 ```
 
-In the try/catch statement above, if your user is not yet logged into Creative Cloud via your app, they will see a `Toast` prompting them to do so. (If you followed the steps in our [User Auth UI guide](https://creativesdk.adobe.com/docs/android/#/articles/userauth/index.html), the user will have already logged in.)
+In the try/catch statement above, if your user is not yet logged into Creative Cloud via your app, they will see a `Toast` prompting them to do so. (If you followed the steps in our User Auth UI guide, the user will have already logged in.)
 
 
 <a name="syncing-fonts"></a>

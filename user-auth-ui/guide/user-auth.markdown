@@ -35,10 +35,10 @@ Be sure to follow all instructions in the `readme`.
 
 <a name="prereqs"></a>
 ## Prerequisites
-This guide will assume that you have installed all software and completed all of the steps in [the Getting Started guide](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html).
+This guide will assume that you have installed all software and completed all of the steps in the Getting Started guide.
 
 - _Your Client ID must be [approved for **Production Mode** by Adobe](https://creativesdk.zendesk.com/hc/en-us/articles/204601215-How-to-complete-the-Production-Client-ID-Request) before you release your app._
-- _Make sure you have the Redirect URI that you receieved during the "Registering Your Application" section of [the Getting Started guide](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html). We will use during this guide._
+- _Make sure you have the Redirect URI that you receieved during the "Registering Your Application" section of the Getting Started guide. We will use during this guide._
 
 
 <a name="config"></a>
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
 Note that as part of building the `AdobeAuthSessionLauncher`, you call:
 
-1. `withRedirectURI()`, passing in the Redirect URI that you received during the "Registering Your Application" section of [the Getting Started guide](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html)
+1. `withRedirectURI()`, passing in the Redirect URI that you received during the "Registering Your Application" section of the Getting Started guide
 1. `withAdditonalScopes()`, passing in a String array of User Auth scopes
 
 **These are both required** to authenticate a user. 
@@ -214,7 +214,7 @@ Articles about common issues are at [help.creativesdk.com](http://help.creatives
 ## Class Reference
 In this guide, we used the classes in the list below. Explore the documentation for more class methods and details.
 
-- [AdobeAuthSessionHelper](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/auth/AdobeAuthSessionHelper.html)
-- [AdobeAuthSessionHelper.AdobeAuthStatus](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/auth/AdobeAuthSessionHelper.AdobeAuthStatus.html)
-- [AdobeAuthSessionHelper.IAdobeAuthStatusCallback](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/auth/AdobeAuthSessionHelper.IAdobeAuthStatusCallback.html)
-- [AdobeUXAuthManager](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/auth/AdobeUXAuthManager.html)
+- AdobeAuthSessionHelper
+- AdobeAuthSessionHelper.AdobeAuthStatus
+- AdobeAuthSessionHelper.IAdobeAuthStatusCallback
+- AdobeUXAuthManager
