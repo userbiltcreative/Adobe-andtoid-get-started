@@ -38,7 +38,7 @@ Be sure to follow all instructions in the `readme`.
 
 <a name="prerequisites"></a>
 ## Prerequisites
-This guide will assume that you have installed all software and completed all of the steps in [the Getting Started guide](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html).
+This guide will assume that you have installed all software and completed all of the steps in the **Getting Started** guide.
 
 _**Note:**_
 
