@@ -47,4 +47,4 @@ compile 'com.adobe.creativesdk.foundation:assetux:0.9.1186'
 compile 'com.adobe.creativesdk.foundation:assetcore:0.9.1186'
 ```
 
-_**Note:** for a more in-depth look at adding the Creative SDK repo to your app and writing Gradle files, [see our Getting Started guide](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html)._
+_**Note:** for a more in-depth look at adding the Creative SDK repo to your app and writing Gradle files, see our Getting Started guide._
