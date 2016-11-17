@@ -31,9 +31,6 @@ allprojects {
             url 'http://maven.localytics.com/public'
         }
 
-        maven {
-            url 'https://artifactory.corp.adobe.com/artifactory/maven-csdk-release/'
-        }
     }
 }
 
