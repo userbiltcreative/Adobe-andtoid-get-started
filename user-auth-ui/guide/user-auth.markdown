@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     /* 4 */
     private void login() {
-        private final String[] authScope = {"email", "profile", "address"};
+        final String[] authScope = {"email", "profile", "address"};
 
         AdobeAuthSessionLauncher authSessionLauncher = new AdobeAuthSessionLauncher.Builder()
                 .withActivity(this)

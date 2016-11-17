@@ -19,10 +19,11 @@ Just follow the steps below.
 1. Add a new Java class called `Keys` with this code:  
 
 	```
-	public class Keys {
+    public class Keys {
 
-	    public static final String CSDK_CLIENT_ID = "<YOUR_ID_HERE>";
-	    public static final String CSDK_CLIENT_SECRET = "<YOUR_SECRET_HERE>";
+	    public static final String CSDK_CLIENT_ID       = "<YOUR_ID_HERE>";
+	    public static final String CSDK_CLIENT_SECRET   = "<YOUR_SECRET_HERE>";
+	    public static final String CSDK_REDIRECT_URI    = "<YOUR_REDIRECT_URI_HERE>";
 
 	}
 	```
