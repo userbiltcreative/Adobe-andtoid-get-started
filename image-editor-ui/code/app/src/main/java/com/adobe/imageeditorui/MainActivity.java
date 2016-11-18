@@ -13,6 +13,9 @@ import com.adobe.creativesdk.aviary.AdobeImageIntent;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
+    static final int REQ_CODE_CSDK_IMAGE_EDITOR = 3001;
+
     private ImageView mEditedImageView;
 
     @Override
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         /* 3) Start the Image Editor with request code 1 */
-        startActivityForResult(imageEditorIntent, 1);
+        startActivityForResult(imageEditorIntent, REQ_CODE_CSDK_IMAGE_EDITOR);
     }
 
     /* Handle the results */
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode) {
 
                 /* Make a case for the request code we passed to startActivityForResult() */
-                case 1:
+                case REQ_CODE_CSDK_IMAGE_EDITOR:
 
                     /* Show the image! */
                     Uri editedImageUri = data.getParcelableExtra(AdobeImageIntent.EXTRA_OUTPUT_URI);
