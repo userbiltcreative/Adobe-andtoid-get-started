@@ -16,7 +16,7 @@ Below is a table that contains all of the framework dependencies for each featur
 |Color Tool UI Component   		|`com.adobe.creativesdk:color:0.9.1186`					|
 |Creative Cloud Files API   	|`com.adobe.creativesdk.foundation:assetcore:0.9.1186`	|
 |Creative Cloud Libraries API	|`com.adobe.creativesdk.foundation:assetcore:0.9.1186`	|
-|Image Editor UI Component  	|`com.adobe.creativesdk:image:4.6.3`					|
+|Image Editor UI Component  	|`com.adobe.creativesdk:image:4.8.3`					|
 |Lightroom Photos API   		|`com.adobe.creativesdk.foundation:assetcore:0.9.1186`	|
 |SendToDesktop API   			|`com.adobe.creativesdk.foundation:assetcore:0.9.1186`	|
 |TypeKit UI Component			|`com.adobe.creativesdk:typekit:0.9.1186`				|
@@ -36,7 +36,7 @@ An example of the correct format for an app using the Creative SDK Image Editor:
 
 ```
 compile 'com.adobe.creativesdk.foundation:auth:0.9.1186'
-compile 'com.adobe.creativesdk:image:4.6.3'
+compile 'com.adobe.creativesdk:image:4.8.3'
 ```
 
 An example of the correct format for an app using the Creative SDK Asset Browser UI and Creative Cloud Files API:
@@ -47,4 +47,4 @@ compile 'com.adobe.creativesdk.foundation:assetux:0.9.1186'
 compile 'com.adobe.creativesdk.foundation:assetcore:0.9.1186'
 ```
 
-_**Note:** for a more in-depth look at adding the Creative SDK repo to your app and writing Gradle files, [see our Getting Started guide](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html)._
+_**Note:** for a more in-depth look at adding the Creative SDK repo to your app and writing Gradle files, see our Getting Started guide._

@@ -14,11 +14,32 @@ Stay tuned for updates as we build out this library of samples!
 <a name="how-to"></a>
 ## How to use
 
-**TL;DR: Your first step should be to check out the app subdirectory in this repo that you are interested in, and follow the instructions in that subdirectory's `code/readme.md` file.**
+### In your browser
 
-This repo contains multiple example apps. Each subdirectory in the repo contains an example app that accompanies an Android developer guide on [creativesdk.com](http://creativesdk.com).
+1. [Register a new app for the Creative SDK](https://adobe.io/console)
+1. Note your **API Key** (Client ID), **Client Secret**, and **Redirect URI**. You will need them soon.
 
-The instructions for setting up each app can be found in the readme in its `/code` subdirectory. The subdirectory readmes also contain links to their respective developer guides, where you can get step-by-step instructions for creating the apps.
+### In your local development environment
+
+1. `git clone` this repo
+1. Open a component's `code` directory Android Studio (e.g., `send-to-desktop-api/code`)
+1. Add a new Java class called `Keys` with this code:  
+
+	```
+    public class Keys {
+
+	    public static final String CSDK_CLIENT_ID       = "<YOUR_ID_HERE>";
+	    public static final String CSDK_CLIENT_SECRET   = "<YOUR_SECRET_HERE>";
+	    public static final String CSDK_REDIRECT_URI    = "<YOUR_REDIRECT_URI_HERE>";
+
+	}
+	```
+
+    1. Add your API Key (Client ID), Client Secret, and Redirect URI to the `Keys` class
+    1. This class is gitignored so you can avoid exposing your keys on GitHub
+1. Sync your Gradle files
+1. Run the app
+1. See the component's `guide` directory to learn more about the component (e.g., `send-to-desktop-api/guide`)
 
 <a name="resources"></a>
 ## More resources for the Creative SDK

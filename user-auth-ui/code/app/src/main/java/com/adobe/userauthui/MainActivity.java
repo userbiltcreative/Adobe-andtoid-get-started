@@ -15,6 +15,9 @@ import com.adobe.creativesdk.foundation.auth.AdobeUXAuthManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
+    static final int REQ_CODE_CSDK_USER_AUTH = 1001;
+
     /* 1 */
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
@@ -37,30 +40,28 @@ public class MainActivity extends AppCompatActivity {
         mStatusCallback = new AdobeAuthSessionHelper.IAdobeAuthStatusCallback() {
             @Override
             public void call(AdobeAuthSessionHelper.AdobeAuthStatus adobeAuthStatus, AdobeAuthException e) {
-                if (AdobeAuthSessionHelper.AdobeAuthStatus.AdobeAuthLoggedIn == adobeAuthStatus) {
+                if (!mUXAuthManager.isAuthenticated()) {
                     /* 3 */
-                    showAuthenticatedUI();
+                    login();
                 } else {
-                    /* 4 */
-                    showAdobeLoginUI();
+                    Log.d(TAG, "Already logged in!");
                 }
             }
         };
     }
 
-    private void showAdobeLoginUI() {
-        mUXAuthManager.login(new AdobeAuthSessionLauncher.Builder()
-                        .withActivity(this)
-                        .withRequestCode(200) // Can be any int
-                        .build()
-        );
-    }
+    /* 4 */
+    private void login() {
+        final String[] authScope = {"email", "profile", "address"};
 
-    private void showAuthenticatedUI() {
+        AdobeAuthSessionLauncher authSessionLauncher = new AdobeAuthSessionLauncher.Builder()
+                .withActivity(this)
+                .withRedirectURI(Keys.CSDK_REDIRECT_URI)
+                .withAdditonalScopes(authScope)
+                .withRequestCode(REQ_CODE_CSDK_USER_AUTH) // Can be any int
+                .build();
 
-        /* 5 */
-        Log.i(MainActivity.class.getSimpleName(), "User is logged in!");
-
+        mUXAuthManager.login(authSessionLauncher);
     }
 
     @Override
@@ -97,6 +98,13 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mAuthSessionHelper.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQ_CODE_CSDK_USER_AUTH:
+                    Log.i(TAG, "User successfully logged in!");
+            }
+        }
     }
 
     @Override

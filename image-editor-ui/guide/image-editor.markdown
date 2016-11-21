@@ -38,7 +38,7 @@ Be sure to follow all instructions in the `readme`.
 
 <a name="prerequisites"></a>
 ## Prerequisites
-This guide will assume that you have installed all software and completed all of the steps in [the Getting Started guide](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html).
+This guide will assume that you have installed all software and completed all of the steps in the **Getting Started** guide.
 
 _**Note:**_
 
@@ -56,7 +56,7 @@ _**Note:**_
     ```language-java
     /* Add the CSDK framework dependencies (Make sure these version numbers are correct) */
     compile 'com.adobe.creativesdk.foundation:auth:0.9.1186'
-    compile 'com.adobe.creativesdk:image:4.6.3'
+    compile 'com.adobe.creativesdk:image:4.8.3'
     compile 'com.localytics.android:library:3.8.0'
     ```
 
@@ -81,6 +81,20 @@ _**Note:**_
 
     _**Tip:** You can see the generated manifest file at `app/build/intermediates/manifests/full/debug/`._
 
+1. Enable jumbo mode
+
+    In the same `build.gradle` file, enable jumbo mode:
+
+    ```language-java
+    android {
+        // ...
+
+        dexOptions {
+            jumboMode true
+        }
+    }
+    ```
+
 1. Add the Maven repository for Localytics
 
     In your _Project_ `build.gradle` file, add the Maven Repository for Localytics
@@ -97,6 +111,46 @@ _**Note:**_
         }
     }
     ``` 
+
+1. Implement the `IAdobeAuthRedirectCredentials` interface
+
+    In your `Application` subclass, implement the `IAdobeAuthRedirectCredentials` interface. In this step, you will use the Redirect Uri that you received when registering your app on the [Adobe.io Console](https://adobe.io/console).
+
+    See comments **#1-3** in the code below:
+
+    ```language-java
+    /* 1) Implement the `IAdobeAuthRedirectCredentials` interface */
+    public class MainApplication extends Application implements IAdobeAuthClientCredentials, IAdobeAuthRedirectCredentials {
+
+        private static final String CREATIVE_SDK_CLIENT_ID = "<YOUR_API_KEY_HERE>";
+        private static final String CREATIVE_SDK_CLIENT_SECRET = "<YOUR_CLIENT_SECRET_HERE>";
+
+        /* 2) Add your Redirect Uri string */
+        private static final String CREATIVE_SDK_REDIRECT_URI = "<YOUR_REDIRECT_URI_HERE>";
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            AdobeCSDKFoundation.initializeCSDKFoundation(getApplicationContext());
+        }
+
+        @Override
+        public String getClientID() {
+            return CREATIVE_SDK_CLIENT_ID;
+        }
+
+        @Override
+        public String getClientSecret() {
+            return CREATIVE_SDK_CLIENT_SECRET;
+        }
+
+        /* 3) Add the interface method */
+        @Override
+        public String getRedirectUri() {
+            return CREATIVE_SDK_REDIRECT_URI;
+        }
+    }
+    ```
 
 The app is now configured and ready to integrate the Image Editor.
 
@@ -254,15 +308,16 @@ Intent imageEditorIntent = new AdobeImageIntent.Builder(this)
 
 |Method name                                |Description                                            |
 |---                                        |---                                                    |
-|setData(Uri) **(* required)**                  |Sets the input image Uri.<br><br>Supported schemes are: <br>- [scheme_file](http://developer.android.com/reference/android/content/ContentResolver.html#SCHEME_FILE) (e.g. file://mnt/sdcard/download/image.jpg)<br>- [scheme_content](http://developer.android.com/reference/android/content/ContentResolver.html#SCHEME_CONTENT) (e.g. content://media/external/images/media/112232)<br><br>_Note: `http` will work for low-resolution editing only, but it is not a feature that we currently support._ |
-|withToolList(ToolLoaderFactory.Tools[])    |Sets the selected list of tools to be shown to the user. An example of creating a `tools` argument:<br><br>`ToolLoaderFactory.Tools[] tools;`<br>`tools = {ToolLoaderFactory.Tools.EFFECTS};`<br>|
+|setData(Uri) **(* required)**              |Sets the input image Uri.<br><br>Supported schemes are: <br>- [scheme_file](http://developer.android.com/reference/android/content/ContentResolver.html#SCHEME_FILE) (e.g. file://mnt/sdcard/download/image.jpg)<br>- [scheme_content](http://developer.android.com/reference/android/content/ContentResolver.html#SCHEME_CONTENT) (e.g. content://media/external/images/media/112232)<br><br>_Note: `http` will work for low-resolution editing only, but it is not a feature that we currently support._ |
+|quickLaunchTool(ToolsFactory.Tools, Bundle)   |Sets the tool to be launched automatically when the Image Editor is launched. An example of creating a `quickLaunchTool` argument:<br><br>`ToolsFactory.Tools quickLaunchTool;`<br>`quickLaunchTool = ToolsFactory.Tools.CROP;`<br>|
+|withToolList(ToolsFactory.Tools[])    |Sets the selected list of tools to be shown to the user. An example of creating a `tools` argument:<br><br>`ToolsFactory.Tools[] tools;`<br>`tools = {ToolsFactory.Tools.EFFECTS};`<br>|
 |withOutput(File)<br>withOutput(Uri)        |Sets the output location where the edited image will be saved.|
-|withOutputFormat(Bitmap.CompressFormat)    |Defines the edited image’s file format.<br><br>Accepted values are JPEG or PNG.  |
-|withOutputQuality(int)                     |If the outputformat is JPEG, defines the quality of the saved JPEG image.   |
+|withOutputFormat(Bitmap.CompressFormat)    |Defines the edited image’s file format.<br><br>Accepted values are JPEG or PNG.|
+|withOutputQuality(int)                     |If the outputformat is JPEG, defines the quality of the saved JPEG image.|
 |withOutputSize(MegaPixels)                 |Sets the output file size (in megapixels).<br><br>If this method is not called, or a value of 0 is passed, then the preview sized image will be returned (usually the screen size of the device).   |
 |saveWithNoChanges(boolean)                 |Indicates what to do if the user presses the “Done” button without making changes to the image.<br><br>If `true` is passed, the image will always be saved and a `RESULT_OK` will be returned to your `onActivityResult()` method. Further, the returned `Intent` will have the `EXTRA_OUT_BITMAP_CHANGED` extra with a value of `false`.<br><br>If false is passed, then you will receive a `RESULT_CANCELED`, and the image will not be saved at all. The returned `Intent` will contain the `EXTRA_OUT_BITMAP_CHANGED` extra, with a value of `false`.|
-|withOptions(Bundle)                        |An optional bundle that you can receive back in your `onActivityResult()` method.                  |
-|withPreviewSize(int)                       |Changes the size of the preview used in the editor.<br><br>This is not the size of the output file, but only the size of the preview used during the edit.   |
+|withOptions(Bundle)                        |An optional bundle that you can receive back in your `onActivityResult()` method.|
+|withPreviewSize(int)                       |Changes the size of the preview used in the editor.<br><br>This is not the size of the output file, but only the size of the preview used during the edit.|
 |withNoExitConfirmation(boolean)            |Set whether the user will see a confirmation dialog when clicking the back button while there are unsaved image edits.<br><br>Setting this to `true` will hide that confirmation. The default setting is `false`.|
 |withVibrationEnabled(boolean)              |Enables or disables the vibration of selected widgets at runtime. Make sure to set your vibration permissions in your `AndroidManifest`:<br><br>`<uses-permission android:name="android.permission.VIBRATE" />`|
 |withAccentColor(Color)                     |Sets the color of UI hightlights such as selected tools or settings.|

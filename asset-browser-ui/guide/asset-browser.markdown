@@ -41,8 +41,8 @@ Be sure to follow all instructions in the `readme`.
 ## Prerequisites
 This guide will assume that you have installed all software and completed all of the steps in the following guides:
 
-- [Getting Started](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html)
-- [User Auth UI](https://creativesdk.adobe.com/docs/android/#/articles/userauth/index.html)
+- Getting Started
+- User Auth UI
 
 _**Note:**_
 
@@ -158,16 +158,16 @@ if (data != null && resultCode == RESULT_OK) {
 
 The actual code you write in `onActivityResult()` will depend on what types of Creative Cloud assets your app is intended to work with.
 
-For details on the available methods for each type of Creative Cloud asset, see our class references:
+For details on the available methods for each type of Creative Cloud asset, see our class references on creativesdk.adobe.com:
 
-- [AdobeSelectionAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionAsset.html)
-- [AdobeSelectionAssetFile](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionAssetFile.html)
-- [AdobeSelectionCompFile](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionCompFile.html)
-- [AdobeSelectionDrawAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionDrawAsset.html)
-- [AdobeSelectionLibraryAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionLibraryAsset.html)
-- [AdobeSelectionPhotoAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionPhotoAsset.html)
-- [AdobeSelectionPSMixFile](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionPSMixFile.html)
-- [AdobeSelectionSketchAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionSketchAsset.html)
+- AdobeSelectionAsset
+- AdobeSelectionAssetFile
+- AdobeSelectionCompFile
+- AdobeSelectionDrawAsset
+- AdobeSelectionLibraryAsset
+- AdobeSelectionPhotoAsset
+- AdobeSelectionPSMixFile
+- AdobeSelectionSketchAsset
 
 ### Common patterns in the download workflow
 The example above is written in a very procedural manner for the sake of demonstration. However, you may find that you prefer to create helper methods to keep your `onActivityResult()` method more readable.
@@ -248,9 +248,9 @@ As with our example above, if your app only works with Lightroom Photos, there's
 ## Uploading Assets
 File uploads are not handled by the Asset Browser UI component, but instead by headless APIs. For more information, please see our class references for the asset type you are working with.
 
-- [Creative Cloud Files API: `AdobeAssetFile`](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeAssetFile.html)
-- [Lightroom Photos API: `AdobePhotoAsset`](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobePhotoAsset.html)
-- [Creative Cloud Libraries: `AdobeLibraryComposite`](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeLibraryComposite.html)
+- Creative Cloud Files API: `AdobeAssetFile`
+- Lightroom Photos API: `AdobePhotoAsset`
+- Creative Cloud Libraries: `AdobeLibraryComposite`
 
 <a name="custom"></a>
 ## Customization
@@ -411,16 +411,16 @@ Articles about common issues are at [help.creativesdk.com](http://help.creatives
 ## Class Reference
 In this guide, we used the classes in the list below. Explore the documentation for more class methods and details.
 
-- [AdobeSelection](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelection.html)
-- [AdobeSelectionAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionAsset.html)
-- [AdobeSelectionAssetFile](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionAssetFile.html)
-- [AdobeSelectionCompFile](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionCompFile.html)
-- [AdobeSelectionDrawAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionDrawAsset.html)
-- [AdobeSelectionLibraryAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionLibraryAsset.html)
-- [AdobeSelectionPhotoAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionPhotoAsset.html)
-- [AdobeSelectionPSMixFile](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionPSMixFile.html)
-- [AdobeSelectionSketchAsset](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeSelectionSketchAsset.html)
-- [AdobeUXAssetBrowser](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeUXAssetBrowser.html)
-- [AdobeUXAssetBrowserConfiguration](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeUXAssetBrowserConfiguration.html)
-- [AdobeUXAssetBrowser.ResultProvider](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/AdobeUXAssetBrowser.ResultProvider.html)
-- [IAdobeGenericRequestCallback](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/storage/IAdobeGenericRequestCallback.html)
+- AdobeSelection
+- AdobeSelectionAsset
+- AdobeSelectionAssetFile
+- AdobeSelectionCompFile
+- AdobeSelectionDrawAsset
+- AdobeSelectionLibraryAsset
+- AdobeSelectionPhotoAsset
+- AdobeSelectionPSMixFile
+- AdobeSelectionSketchAsset
+- AdobeUXAssetBrowser
+- AdobeUXAssetBrowserConfiguration
+- AdobeUXAssetBrowser.ResultProvider
+- IAdobeGenericRequestCallback

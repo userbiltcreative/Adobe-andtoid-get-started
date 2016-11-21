@@ -27,6 +27,10 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
+    static final int REQ_CODE_CSDK_USER_AUTH = 1001;
+    static final int REQ_CODE_GALLERY_PICKER = 20;
+
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
 
@@ -52,38 +56,6 @@ public class MainActivity extends AppCompatActivity {
         mSelectedImageView = (ImageView) findViewById(R.id.selectedImageView);
         mSendToDesktopProgressBar = (ProgressBar) findViewById(R.id.sendToDesktopProgressBar);
 
-    }
-
-    private AdobeAuthSessionHelper.IAdobeAuthStatusCallback mStatusCallback;
-    {
-        mStatusCallback = new AdobeAuthSessionHelper.IAdobeAuthStatusCallback() {
-            @Override
-            public void call(AdobeAuthSessionHelper.AdobeAuthStatus adobeAuthStatus, AdobeAuthException e) {
-                if (AdobeAuthSessionHelper.AdobeAuthStatus.AdobeAuthLoggedIn == adobeAuthStatus) {
-
-                    showAuthenticatedUI();
-
-                } else {
-
-                    showAdobeLoginUI();
-
-                }
-            }
-        };
-    }
-
-    private void showAdobeLoginUI() {
-        mUXAuthManager.login(new AdobeAuthSessionLauncher.Builder()
-                        .withActivity(this)
-                        .withRequestCode(200) // Can be any int
-                        .build()
-        );
-    }
-
-    private void showAuthenticatedUI() {
-
-        Log.i(MainActivity.class.getSimpleName(), "User is logged in!");
-
         View.OnClickListener openGalleryButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 galleryPickerIntent.setType("image/*");
                 galleryPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-                startActivityForResult(Intent.createChooser(galleryPickerIntent, "Select an Image"), 203); // Can be any int
+                startActivityForResult(Intent.createChooser(galleryPickerIntent, "Select an Image"), REQ_CODE_GALLERY_PICKER); // Can be any int
             }
         };
         mOpenGalleryButton.setOnClickListener(openGalleryButtonListener);
@@ -103,24 +75,52 @@ public class MainActivity extends AppCompatActivity {
                 mSendToDesktopProgressBar.setVisibility(View.VISIBLE);
 
 
-                    if (mSelectedImageUri != null) {
-                        try {
-                            sendToDesktop();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                if (mSelectedImageUri != null) {
+                    try {
+                        sendToDesktop();
+                    } catch (IOException e) {
+                        e.printStackTrace();
 
-                            mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    else {
                         mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Unable to send. Check your connection", Toast.LENGTH_LONG).show();
                     }
+                }
+                else {
+                    mSendToDesktopProgressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(MainActivity.this, "Select an image from the Gallery", Toast.LENGTH_LONG).show();
+                }
             }
         };
         mSendToPhotoshopButton.setOnClickListener(sendToPhotoshopButtonListener);
 
+    }
+
+    private AdobeAuthSessionHelper.IAdobeAuthStatusCallback mStatusCallback;
+    {
+        mStatusCallback = new AdobeAuthSessionHelper.IAdobeAuthStatusCallback() {
+            @Override
+            public void call(AdobeAuthSessionHelper.AdobeAuthStatus adobeAuthStatus, AdobeAuthException e) {
+                if (!mUXAuthManager.isAuthenticated()) {
+                    /* 3 */
+                    login();
+                } else {
+                    Log.d(TAG, "Already logged in!");
+                }
+            }
+        };
+    }
+
+    private void login() {
+        final String[] authScope = {"email", "profile", "address"};
+
+        AdobeAuthSessionLauncher authSessionLauncher = new AdobeAuthSessionLauncher.Builder()
+                .withActivity(this)
+                .withRedirectURI(Keys.CSDK_REDIRECT_URI)
+                .withAdditonalScopes(authScope)
+                .withRequestCode(REQ_CODE_CSDK_USER_AUTH) // Can be any int
+                .build();
+
+        mUXAuthManager.login(authSessionLauncher);
     }
 
     private void sendToDesktop() throws IOException {
@@ -183,11 +183,19 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         mAuthSessionHelper.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode == 203) { // the int we used for startActivityForResult()
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQ_CODE_CSDK_USER_AUTH:
+                    Log.i(TAG, "User successfully logged in!");
 
-            mSelectedImageUri = data.getData();
-            mSelectedImageView.setImageURI(mSelectedImageUri);
+                    break;
 
+                case REQ_CODE_GALLERY_PICKER:
+                    mSelectedImageUri = data.getData();
+                    mSelectedImageView.setImageURI(mSelectedImageUri);
+
+                    break;
+            }
         }
     }
 

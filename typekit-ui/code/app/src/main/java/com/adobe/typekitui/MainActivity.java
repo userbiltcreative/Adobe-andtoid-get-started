@@ -39,6 +39,9 @@ import java.util.Random;
 /* Implement the `Observer` interface  */
 public class MainActivity extends AppCompatActivity implements Observer {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
+    static final int REQ_CODE_CSDK_USER_AUTH = 1001;
+
     private AdobeUXAuthManager mUXAuthManager = AdobeUXAuthManager.getSharedAuthManager();
     private AdobeAuthSessionHelper mAuthSessionHelper;
 
@@ -106,14 +109,29 @@ public class MainActivity extends AppCompatActivity implements Observer {
         mStatusCallback = new AdobeAuthSessionHelper.IAdobeAuthStatusCallback() {
             @Override
             public void call(AdobeAuthSessionHelper.AdobeAuthStatus adobeAuthStatus, AdobeAuthException e) {
-                if (AdobeAuthSessionHelper.AdobeAuthStatus.AdobeAuthLoggedIn == adobeAuthStatus) {
-                    initializeTypekitManager();
-                    showAuthenticatedUI();
+                if (!mUXAuthManager.isAuthenticated()) {
+                    /* 3 */
+                    login();
                 } else {
-                    showAdobeLoginUI();
+                    Log.d(TAG, "Already logged in!");
+                    initializeTypekitManager();
                 }
             }
         };
+    }
+
+    /* 4 */
+    private void login() {
+        final String[] authScope = {"email", "profile", "address"};
+
+        AdobeAuthSessionLauncher authSessionLauncher = new AdobeAuthSessionLauncher.Builder()
+                .withActivity(this)
+                .withRedirectURI(Keys.CSDK_REDIRECT_URI)
+                .withAdditonalScopes(authScope)
+                .withRequestCode(REQ_CODE_CSDK_USER_AUTH) // Can be any int
+                .build();
+
+        mUXAuthManager.login(authSessionLauncher);
     }
 
     private void initializeTypekitManager() {
@@ -128,20 +146,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
             Toast.makeText(this, "Please log in to Creative Cloud to use Typekit fonts!", Toast.LENGTH_LONG).show();
         }
-    }
-
-    private void showAdobeLoginUI() {
-        mUXAuthManager.login(new AdobeAuthSessionLauncher.Builder()
-                        .withActivity(this)
-                        .withRequestCode(200) // Can be any int
-                        .build()
-        );
-    }
-
-    private void showAuthenticatedUI() {
-
-        Log.i(MainActivity.class.getSimpleName(), "User is logged in!");
-
     }
 
     @Override
@@ -178,6 +182,15 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mAuthSessionHelper.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQ_CODE_CSDK_USER_AUTH:
+                    Log.i(TAG, "User successfully logged in!");
+
+                    break;
+            }
+        }
     }
 
     /* Implement the `Observer` interface method */

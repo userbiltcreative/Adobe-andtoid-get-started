@@ -40,8 +40,8 @@ Be sure to follow all instructions in the `readme`.
 ## Prerequisites
 This guide will assume that you have installed all software and completed all of the steps in the following guides:
 
-- [Getting Started](https://creativesdk.adobe.com/docs/android/#/articles/gettingstarted/index.html)
-- [User Auth UI](https://creativesdk.adobe.com/docs/android/#/articles/userauth/index.html)
+- Getting Started
+- User Auth UI
 
 _**Note:**_
 
@@ -134,7 +134,7 @@ We will use this basic setup to send the image from the Android device to Photos
 
 <a name="send-to-desktop-method"></a>
 ## Making a `sendToDesktop()` helper method
-We will use [the `AdobeSendToDesktopApplication.sendToDesktop()` method](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/sendtodesktop/AdobeSendToDesktopApplication.html) to send our image to the desktop. 
+We will use the `AdobeSendToDesktopApplication.sendToDesktop()` method to send our image to the desktop. 
 
 The `AdobeSendToDesktopApplication.sendToDesktop()` method supports sending the following asset types: 
 
@@ -212,7 +212,7 @@ Articles about common issues are at [help.creativesdk.com](http://help.creatives
 ## Class Reference
 In this guide, we used the classes in the list below. Explore the documentation for more class methods and details.
 
-- [AdobeSendToDesktopApplication](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/sendtodesktop/AdobeSendToDesktopApplication.html)
-- [AdobeCreativeCloudApplication](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/sendtodesktop/AdobeCreativeCloudApplication.html)
-- [IAdobeSendToDesktopCallBack](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/sendtodesktop/IAdobeSendToDesktopCallBack.html)
-- [AdobeSendToDesktopException](https://creativesdk.adobe.com/docs/android/#/com/adobe/creativesdk/foundation/sendtodesktop/AdobeSendToDesktopException.html)
+- AdobeSendToDesktopApplication
+- AdobeCreativeCloudApplication
+- IAdobeSendToDesktopCallBack
+- AdobeSendToDesktopException
