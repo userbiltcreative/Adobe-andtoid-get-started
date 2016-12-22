@@ -47,7 +47,7 @@ Add the following Creative SDK dependency to your _Module_ `build.gradle` file:
 
 ```language-java
 /* Add the CSDK framework dependency (Make sure the version number is correct) */
-compile 'com.adobe.creativesdk.foundation:auth:0.9.1186'
+compile 'com.adobe.creativesdk.foundation:auth:0.9.1251'
 ```
 
 
@@ -99,12 +99,9 @@ public class MainActivity extends AppCompatActivity {
 
     /* 4 */
     private void login() {
-        final String[] authScope = {"email", "profile", "address"};
 
         AdobeAuthSessionLauncher authSessionLauncher = new AdobeAuthSessionLauncher.Builder()
                 .withActivity(this)
-                .withRedirectURI("<YOUR_REDIRECT_URI_HERE>")
-                .withAdditonalScopes(authScope)
                 .withRequestCode(1001) // Can be any int
                 .build();
 
@@ -114,14 +111,7 @@ public class MainActivity extends AppCompatActivity {
     // ...
 ```
 
-Note that as part of building the `AdobeAuthSessionLauncher`, you call:
-
-1. `withRedirectURI()`, passing in the Redirect URI that you received during the "Registering Your Application" section of the Getting Started guide
-1. `withAdditonalScopes()`, passing in a String array of User Auth scopes
-
-**These are both required** to authenticate a user. 
-
-The Redirect URI helps authenticate your client to Adobe. The additional scopes let the user authorize your app for the required level of access to their information (the user will be shown a screen noting what information they are authorizing access for).
+At this point, we are handling User Auth for the Android `onCreate()` lifecycle method, but we need to handle other Activity lifecycle methods as well. We'll have a look at that in the next section.
 
 <a name="overrides"></a>
 ## Activity Lifecycle methods
