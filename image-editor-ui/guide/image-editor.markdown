@@ -55,8 +55,8 @@ _**Note:**_
 
     ```language-java
     /* Add the CSDK framework dependencies (Make sure these version numbers are correct) */
-    compile 'com.adobe.creativesdk.foundation:auth:0.9.1186'
-    compile 'com.adobe.creativesdk:image:4.8.3'
+    compile 'com.adobe.creativesdk.foundation:auth:0.9.1251'
+    compile 'com.adobe.creativesdk:image:4.8.4'
     compile 'com.localytics.android:library:3.8.0'
     ```
 
@@ -111,46 +111,6 @@ _**Note:**_
         }
     }
     ``` 
-
-1. Implement the `IAdobeAuthRedirectCredentials` interface
-
-    In your `Application` subclass, implement the `IAdobeAuthRedirectCredentials` interface. In this step, you will use the Redirect Uri that you received when registering your app on the [Adobe.io Console](https://adobe.io/console).
-
-    See comments **#1-3** in the code below:
-
-    ```language-java
-    /* 1) Implement the `IAdobeAuthRedirectCredentials` interface */
-    public class MainApplication extends Application implements IAdobeAuthClientCredentials, IAdobeAuthRedirectCredentials {
-
-        private static final String CREATIVE_SDK_CLIENT_ID = "<YOUR_API_KEY_HERE>";
-        private static final String CREATIVE_SDK_CLIENT_SECRET = "<YOUR_CLIENT_SECRET_HERE>";
-
-        /* 2) Add your Redirect Uri string */
-        private static final String CREATIVE_SDK_REDIRECT_URI = "<YOUR_REDIRECT_URI_HERE>";
-
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            AdobeCSDKFoundation.initializeCSDKFoundation(getApplicationContext());
-        }
-
-        @Override
-        public String getClientID() {
-            return CREATIVE_SDK_CLIENT_ID;
-        }
-
-        @Override
-        public String getClientSecret() {
-            return CREATIVE_SDK_CLIENT_SECRET;
-        }
-
-        /* 3) Add the interface method */
-        @Override
-        public String getRedirectUri() {
-            return CREATIVE_SDK_REDIRECT_URI;
-        }
-    }
-    ```
 
 The app is now configured and ready to integrate the Image Editor.
 

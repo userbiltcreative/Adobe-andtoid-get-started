@@ -31,11 +31,12 @@ Stay tuned for updates as we build out this library of samples!
 	    public static final String CSDK_CLIENT_ID       = "<YOUR_ID_HERE>";
 	    public static final String CSDK_CLIENT_SECRET   = "<YOUR_SECRET_HERE>";
 	    public static final String CSDK_REDIRECT_URI    = "<YOUR_REDIRECT_URI_HERE>";
-
+		public static final String[] CSDK_SCOPES        = {"email", "profile", "address"};
 	}
 	```
 
     1. Add your API Key (Client ID), Client Secret, and Redirect URI to the `Keys` class
+    1. Scope is not currently configurable. Please use the value of `CSDK_SCOPES` as seen above.
     1. This class is gitignored so you can avoid exposing your keys on GitHub
 1. Sync your Gradle files
 1. Run the app
