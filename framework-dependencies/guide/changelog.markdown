@@ -19,9 +19,11 @@ The following components are deprecated and no longer supported:
 
 
 
-
 # Creative SDK v0.9.1186
 November 2, 2016
+
+**IMPORTANT:** If you are updating to v0.9.1186 and above, you will need to register a new API Key, Secret and redirectURL from the new [Adobe I/O Console](https://console.adobe.io/integrations).
+
 
 ## Android N (API 24) Support
 
