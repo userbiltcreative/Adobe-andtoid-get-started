@@ -245,7 +245,7 @@ December 15, 2014
 Known Issues:
 - The Creative SDK is not yet supported for tablet form factors.
 
-## Asset Browser**
+## Asset Browser
 
 - Development Status: Beta
 - Visual component that provides access to files stored in the Creative Cloud.
@@ -254,7 +254,7 @@ Known Issues:
 - NEW APIs for access Creative Cloud files and Lightroom photos.
 - NEW APIs for Send to Photoshop and Send to Illustrator.
 
-##Auth
+## Auth
 
 - Development Status: Stable
 - Visual component that provides support for end-user login to the Creative Cloud.
