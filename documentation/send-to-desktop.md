@@ -91,7 +91,7 @@ In your `content_main.xml` layout file, add the following `Button` and `ImageVie
 
 Then in `MainActivity.java`, add variables for the `Button` and `ImageView` and assign their values in the `onCreate()` method. 
 
-See the code under comments **#1-4** below (_**Note:** you will need to assign a valid `Uri` to `mSelectedImageUri` for this example to work_):
+See the code under comments **#1-3** below (_**Note:** you will need to assign a valid `Uri` to `mSelectedImageUri` for this example to work_):
 
 ```language-java
 public class MainActivity extends AppCompatActivity {
