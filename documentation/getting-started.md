@@ -242,7 +242,7 @@ Client authentication is required to use the Creative SDK. You can authenticate 
 
 See the guidelines in the Branding Guidelines.
 
-All use is covered by our Terms of Use.
+All use is covered by our Terms of Use as found on the [Adobe I/O Console](https://console.adobe.io/).
 
 
 ### Submit Your Application for Review
