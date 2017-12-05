@@ -240,13 +240,16 @@ Client authentication is required to use the Creative SDK. You can authenticate 
 
 ### Terms of Use (TOU) and Branding
 
-See the guidelines in [Using the Creative Cloud Badge and Brand](https://creativesdk.adobe.com/docs/android/#/brandguidelines/index.html) and the [Terms of Use](http://wwwimages.adobe.com/content/dam/Adobe/en/legal/servicetou/Creative_SDK-en_US.pdf).
+See the guidelines in the Branding Guidelines.
+
+All use is covered by our Terms of Use.
+
 
 ### Submit Your Application for Review
 
 Adobe must review all applications that use the Creative SDK before they are released.
 
-[Instructions for submitting your app for review are here](https://creativesdk.zendesk.com/hc/en-us/articles/204601215-How-to-complete-the-Production-Client-ID-Request).
+See the App Submission Guidelines for more information.
 
 
 ### Troubleshooting and Support
