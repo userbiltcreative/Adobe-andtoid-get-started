@@ -1,12 +1,14 @@
-# Creative SDK v0.9.2006-5
+# Changelog
+
+## Creative SDK v0.9.2006-5
 November 27, 2016
 
-## Improvements
+### Improvements
 
 - Android O Support
 - Bug fixes for performance and stability
 
-## Deprecations
+### Deprecations
 
 The following components are deprecated and no longer supported:
 
@@ -19,24 +21,24 @@ The following components are deprecated and no longer supported:
 
 
 
-# Creative SDK v0.9.1186
+## Creative SDK v0.9.1186
 November 2, 2016
 
 **IMPORTANT:** If you are updating to v0.9.1186 and above, you will need to register a new API Key, Secret and redirectURL from the new [Adobe I/O Console](https://console.adobe.io/integrations).
 
 
-## Android N (API 24) Support
+### Android N (API 24) Support
 
 - The Creative SDK now supports Android N (API 24). This is now the maximum API level supported.
 API Keys and Secrets
 - Instead of the previous Client ID/Secret authentication, Client Auth for the Creative SDK now requires a new API Key, Client Secret, and unique Redirect URL. These credentials can be generated on the new [Adobe I/O Console](https://console.adobe.io/integrations).
 
-## Redirect URI
+### Redirect URI
 
 - When you register a new Integration or generate new Client Auth credentials for an existing Integration (as mentioned above), you will be given a Redirect URI, which is used as part of the User Auth workflow.
 - See our User Auth UI guide for implementation details.
 
-## Image Editor (v4.8.3) updates
+### Image Editor (v4.8.3) updates
 
 - New optional method `quickLaunchTool()` lets you auto-launch a designated tool when the Image Editor is launched.
 - New optional method `forceCrop()` lets you require users to crop an image to a specified ratio before making any other edits.
@@ -44,36 +46,36 @@ API Keys and Secrets
 
 See our Image Editor UI guide for implementation details.
 
-# Creative SDK v0.9.1062
+## Creative SDK v0.9.1062
 August 2, 2016
 
-## Asset Browser UI
+### Asset Browser UI
 
 - Adds support for Read Only Folders and Read Only Libraries
 - Adds Pattern Support
 
-## Adobe Labs
+### Adobe Labs
 
 - Initial release! Features:
     - Magic Path
     - Magic Curve
     - Perspective View
 
-## Behance UI
+### Behance UI
 
 - Logout issue fix seen using Behance App
 - Behance Project Viewer updated
 - CancelPublish, AdobeBehanceSDKProjectPublishOptions APIs added
 
-## Color UI
+### Color UI
 
 - Updates to Color SDK component to support Android Tablet layouts
 
-## Image Editor UI
+### Image Editor UI
 
 - Adobe ID sign for users to access and sync more free Effects, Stickers, Frames and Overlays.
 
-## Send To Desktop API
+### Send To Desktop API
 
 - Changes to sendData() method:
     - Now accepts inputStream instead of byte[]
@@ -88,7 +90,7 @@ August 2, 2016
     - sendLocalFile(String filePath, String fileType, AdobeCreativeCloudApplication application, String name, IAdobeSendToDesktopCallBack sendLocalFileCallback)
 
 
-## Typekit UI
+### Typekit UI
 
 - Initial release! Features:
     - Ability to search fonts
@@ -96,10 +98,10 @@ August 2, 2016
 
 ***
 
-# Creative SDK v0.9.7
+## Creative SDK v0.9.7
 March 3, 2016
 
-## AdobeCreativeSDKFoundation
+### AdobeCreativeSDKFoundation
 
 - Android API 23 Support
     - Android M runtime permissions required by the SDK components are handled by the SDK
@@ -110,7 +112,7 @@ March 3, 2016
     - Refer to the API documentation for more details
 - Bug fixes in all components
 
-## Image Editor
+### Image Editor
 - The Image Editor class has been renamed to AdobeImageIntent
 - Updated UI with Material Deisgn
 - New "Adjust" tool
@@ -118,10 +120,10 @@ March 3, 2016
 
 ***
 
-# Creative SDK v0.7.329
+## Creative SDK v0.7.329
 October 29, 2015
 
-## AdobeCreativeSDKFoundation
+### AdobeCreativeSDKFoundation
 
 - The Foundation SDK has been broken up into four smaller SDKs to help keep the size of your app down. Below is a list of the new Framework breakup:
     - CreativeSDKFoundationAppLibrary
@@ -133,7 +135,7 @@ October 29, 2015
 - The new CreativeSDKFoundationAssetUX contains the Creative SDK's Asset Browser UI components.
 - The new CreativeSDKFoundationAppLibrary showcases apps that use the Creative SDK.
 
-## CreativeSDKColor
+### CreativeSDKColor
 - A new UI component for Android that offers:
     - A Color Picker
     - Color Themes
@@ -142,18 +144,18 @@ October 29, 2015
 ***
 
 
-# Creative SDK v0.5.3
+## Creative SDK v0.5.3
 July 27, 2015
 
-## AdobeCreativeSDKFoundation
+### AdobeCreativeSDKFoundation
 - Miscellaneous bug fixes
 
 ***
 
-# Creative SDK v0.4.264
+## Creative SDK v0.4.264
 June 4, 2015
 
-## AdobeCreativeSDKFoundation
+### AdobeCreativeSDKFoundation
 
 - The Asset Browser UI and Authentication Component is now localized in 18 languages:
     - English, French, German, Japanese, Italian, Spanish, Russian, Korean, Portugese, Polish, Simplified Chinese, Traditional Chinese, Swedish, Turkish, Danish, Dutch, Finnish, Norwegian.
@@ -166,17 +168,17 @@ June 4, 2015
     - DEPRECATED. sendItem method has been replaced by the above methods and will be removed from the SDK in a future release.
 - New APIs to access Mobile Creations(PSMix,Draw,Line,Sketch,Comp).
 
-##Asset Browser##
+###Asset Browser##
 
 - Adds support for Mobile Creations (content from PSMix, Draw, Line, Sketch, and Comp).
 - Adds support for Libraries.
 - Adds support for viewing multi-page documents.
 
-## AdobeCreativeSDKImage
+### AdobeCreativeSDKImage
 
 - Miscellaneous Bug fixes.
 
-## AdobeCreativeSDKBehance
+### AdobeCreativeSDKBehance
 
 - Behance Component is now localized in 18 languages:
     - English, French, German, Japanese, Italian, Spanish, Russian, Korean, Portugese, Polish, Simplified Chinese, Traditional Chinese, Swedish, Turkish, Danish, Dutch, Finnish, Norwegian.
@@ -185,17 +187,17 @@ June 4, 2015
 
 ***
 
-# Creative SDK v0.3.94
+## Creative SDK v0.3.94
 February 16, 2015
 
-## AdobeCreativeSDKFoundation
+### AdobeCreativeSDKFoundation
 
 - New APIs for creating PSD and AI documents.
 Known Issues:
 - The Creative SDK is not yet supported for tablet form factors.
 - Mismatch of localization across components.
 
-## Asset Browser
+### Asset Browser
 
 - Development Status: Stable
 - Visual component that provides access to files stored in the Creative Cloud and Lightroom photos.
@@ -206,7 +208,7 @@ Known Issues:
     - Japanese
 - Streaming previews for videos stored in the Creative Cloud.
 
-##Auth
+###Auth
 
 - Development Status: Stable
 - Visual component that provides support for end-user login to the Creative Cloud.
@@ -215,13 +217,13 @@ Known Issues:
     &lt;activity&gt;…android:theme="@style/AdobeCSDKThemeActivity"&gt;&lt;/activity&gt;
 
 
-## AdobeCreativeSDKImage
+### AdobeCreativeSDKImage
 
 - Development Status: Stable
 - Visual image editor component (formerly the Aviary SDK).
 - No improvements with this release.
 
-## AdobeCreativeSDKBehance
+### AdobeCreativeSDKBehance
 
 - Development Status: Stable
 - Enable users to publish work-in-progress (WIP) and projects to Behance
@@ -235,10 +237,10 @@ Known Issues:
 ***
 
 
-# Creative SDK v0.2.10
+## Creative SDK v0.2.10
 December 15, 2014
 
-## AdobeCreativeSDKFoundation
+### AdobeCreativeSDKFoundation
 
 - Includes two components for accessing assets stored in the Creative Cloud and authorization.
 - New support for portrait and landscape mode.
@@ -247,7 +249,7 @@ December 15, 2014
 Known Issues:
 - The Creative SDK is not yet supported for tablet form factors.
 
-## Asset Browser
+### Asset Browser
 
 - Development Status: Beta
 - Visual component that provides access to files stored in the Creative Cloud.
@@ -256,14 +258,14 @@ Known Issues:
 - NEW APIs for access Creative Cloud files and Lightroom photos.
 - NEW APIs for Send to Photoshop and Send to Illustrator.
 
-## Auth
+### Auth
 
 - Development Status: Stable
 - Visual component that provides support for end-user login to the Creative Cloud.
 - Support for Creative Cloud sign-up in addition to sign-in.
 - Support for Type-2 and Type-3 Adobe IDs.
 
-## AdobeCreativeSDKImage
+### AdobeCreativeSDKImage
 
 - Development Status: Stable
 - Image editor component (formerly the Aviary SDK).
@@ -273,7 +275,7 @@ Known Issues:
 - Sticker flip and sticker opacity.
 - Simplified high resolution API.
 
-## AdobeCreativeSDKBehance
+### AdobeCreativeSDKBehance
 
 - Development Status: Beta
 - Enable users to publish work-in-progress (WIP) and projects to Behance
@@ -287,22 +289,22 @@ Known Issues:
 ***
 
 
-# Creative SDK v0.1.100
+## Creative SDK v0.1.100
 October 5, 2014
 
-## Auth
+### Auth
 - Development Status: Stable
 - Visual component that provides support for end-user login to the Creative Cloud.
 - Provides authentication token which is required by Creative Cloud API.
 - Allows for Creative Cloud sign-up as well as sign-in.
 
-## Asset Browser
+### Asset Browser
 - Development Status: Stable
 - Visual component that provides access to files stored in the Creative Cloud.
 - Support for single selection mode and multi-selection mode.
 - Basic sorting and search/filtering.
 
-## AdobeCreativeSDKBehance
+### AdobeCreativeSDKBehance
 - Development Status: Stable
 - Enable users to publish work-in-progress (WIP) and projects to Behance
     - Work-in-progress: A single image, commonly used to represent an unfinished work.
