@@ -55,8 +55,8 @@ Add the following Creative SDK dependencies to your _Module_ `build.gradle` file
 
 ```language-java
 /* Add the CSDK framework dependencies (Make sure these version numbers are correct) */
-compile 'com.adobe.creativesdk.foundation:auth:0.9.1251'
-compile 'com.adobe.creativesdk.foundation:assetux:0.9.1251'
+compile 'com.adobe.creativesdk.foundation:auth:0.9.2006-5'
+compile 'com.adobe.creativesdk.foundation:assetux:0.9.2006-5'
 ```
 
 
@@ -91,7 +91,7 @@ In your `content_main.xml` layout file, add the following `Button` and `ImageVie
 
 Then in `MainActivity.java`, add variables for the `Button` and `ImageView` and assign their values in the `onCreate()` method. 
 
-See the code under comments **#1-3** below (_**Note:** you will need to assign a valid `Uri` to `mSelectedImageUri` for this example to work_):
+See the code under comments **#1-4** below (_**Note:** you will need to assign a valid `Uri` to `mSelectedImageUri` for this example to work_):
 
 ```language-java
 public class MainActivity extends AppCompatActivity {

@@ -1,12 +1,12 @@
 # Getting started with the Creative SDK for Android
 
-The Creative SDK lets you build applications that integrate with the Creative Cloud and leverage its power to benefit your users. 
+The Creative SDK lets you build applications that integrate with the Creative Cloud and leverage its power to benefit your users.
 
 From letting your users import from and save to their Creative Cloud storage, to using innovative Photoshop APIs via your application, the Creative SDK will help you expand the features of your app by using the Adobe platform.
 
 This guide shows you how to get up and running with the Creative SDK for Android, including how to authenticate your client, a necessary step for integration with the SDK.
 
-_**Note:** The Creative SDK for Android is now available as a **remote Maven repo**. It is no longer available as a download from this site. See the the first step of **the section "Adding the SDK to a New Project" in this guide** for details._ 
+_**Note:** The Creative SDK for Android is now available as a **remote Maven repo**. It is no longer available as a download from this site. See the the first step of **the section "Adding the SDK to a New Project" in this guide** for details._
 
 
 ## Contents
@@ -25,7 +25,7 @@ _**Note:** The Creative SDK for Android is now available as a **remote Maven rep
 <a name="github"></a>
 ## GitHub
 
-You can find companion GitHub repos for the Creative SDK developer guides [on the Creative SDK GitHub organization](https://github.com/CreativeSDK/android-getting-started-samples). 
+You can find companion GitHub repos for the Creative SDK developer guides [on the Creative SDK GitHub organization](https://github.com/CreativeSDK/android-getting-started-samples).
 
 Be sure to follow all instructions in the `readme`.
 
@@ -37,25 +37,25 @@ Be sure to follow all instructions in the `readme`.
 
     - Mac OS X, Windows, or Linux
     - [Android Studio](https://developer.android.com/sdk/index.html) 2.0 or higher
-    - [Android SDK](https://developer.android.com/sdk/index.html) 16 or higher (maximum 25)
+    - [Android SDK](https://developer.android.com/sdk/index.html) 16 or higher (maximum 26)
     - Gradle 2.1.2 or higher
     - Android build tools version 23.0.3 or higher
     - Android Support Repository 32 or higher
 
 
-_**Note:** The Creative SDK supports Android API Level 16 as the lowest [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), and API Level 25 as the maximum [targetSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#target)._
+_**Note:** The Creative SDK supports Android API Level 16 as the lowest [minSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#min), and API Level 26 as the maximum [targetSdkVersion](http://developer.android.com/guide/topics/manifest/uses-sdk-element.html#target)._
 
 
 <a name="register"></a>
 ## Registering Your Application
 
-When you register your application, you are automatically approved for Development Mode. 
+When you register your application, you are automatically approved for Development Mode.
 
 _**Important:** Your Client ID (API Key) must be [approved for **Production Mode** by Adobe](https://creativesdk.zendesk.com/hc/en-us/articles/204601215-How-to-complete-the-Production-Client-ID-Request) before you release your app._ See the ["What's Next?"](#whats-next) section of this guide for details on submitting your app for Production Mode approval.
 
 To register your application for Development Mode, [follow the steps in our App Registration guide](https://creativesdk.zendesk.com/hc/en-us/articles/216369343-Why-and-how-to-register-my-app-).
 
-After registering your app, note your API Key (Client ID), Client Secret, and Redirect URI for use later in this guide. 
+After registering your app, note your API Key (Client ID), Client Secret, and Redirect URI for use later in this guide.
 
 
 <a name="new-project"></a>
@@ -112,13 +112,13 @@ The Creative SDK is offered as a remote Maven repository. This section will show
     apply plugin: 'me.tatarka.retrolambda'
 
     android {
-        compileSdkVersion 25
-        buildToolsVersion "25.0.0"
+        compileSdkVersion 26
+        buildToolsVersion "26.0.1"
 
         defaultConfig {
             applicationId "com.adobe.gettingstarted"
             minSdkVersion 16 // Minimum is 16
-            targetSdkVersion 25 // Maximum is 25
+            targetSdkVersion 26 // Maximum is 26
             versionCode 1
             versionName "1.0"
         }
@@ -149,11 +149,10 @@ The Creative SDK is offered as a remote Maven repository. This section will show
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
         testCompile 'junit:junit:4.12'
-        compile 'com.android.support:appcompat-v7:25.1.0'
-        compile 'com.android.support:design:25.1.0'
+        compile 'com.android.support:appcompat-v7:26.0.1'
 
         /* 4) Add the CSDK framework dependencies (Make sure these version numbers are correct) */
-        compile 'com.adobe.creativesdk.foundation:auth:0.9.1251'
+        compile 'com.adobe.creativesdk.foundation:auth:0.9.2006-5'
     }
     ```
 
@@ -172,10 +171,10 @@ Client authentication is required to use the Creative SDK. You can authenticate 
 1. Configure your `Application` subclass
 
 	Add the following code to your `MainApplication` class:
-    
+
     ```language-java
     public class MainApplication extends Application implements IAdobeAuthClientCredentials {
-        
+
         /* Be sure to fill in the two strings below. */
         private static final String CREATIVE_SDK_CLIENT_ID      = "<YOUR_API_KEY_HERE>";
         private static final String CREATIVE_SDK_CLIENT_SECRET  = "<YOUR_CLIENT_SECRET_HERE>";
@@ -211,9 +210,9 @@ Client authentication is required to use the Creative SDK. You can authenticate 
     ```
 
     _**Note:** Scope is not currently configurable. Please use the value of `CREATIVE_SDK_SCOPES` as seen above._
-   
+
 1. Register the Main Application in the Android Manifest
-    
+
     Inside of the top level `application` tag, we will add a new attribute: `android:name=".MainApplication"`:
 
     ```language-xml
@@ -241,11 +240,11 @@ Client authentication is required to use the Creative SDK. You can authenticate 
 
 ### Terms of Use (TOU) and Branding
 
-See the guidelines in [Using the Creative Cloud Badge and Brand](https://creativesdk.adobe.com/docs/android/#/brandguidelines/index.html) and the [Terms of Use](http://wwwimages.adobe.com/content/dam/Adobe/en/legal/servicetou/Creative_SDK-en_US.pdf). 
+See the guidelines in [Using the Creative Cloud Badge and Brand](https://creativesdk.adobe.com/docs/android/#/brandguidelines/index.html) and the [Terms of Use](http://wwwimages.adobe.com/content/dam/Adobe/en/legal/servicetou/Creative_SDK-en_US.pdf).
 
 ### Submit Your Application for Review
 
-Adobe must review all applications that use the Creative SDK before they are released. 
+Adobe must review all applications that use the Creative SDK before they are released.
 
 [Instructions for submitting your app for review are here](https://creativesdk.zendesk.com/hc/en-us/articles/204601215-How-to-complete-the-Production-Client-ID-Request).
 
@@ -289,21 +288,15 @@ You can learn more in the Creative SDK framework guides:
 - User Auth UI
 - Asset Browser UI
 - TypeKit UI
-- Creative Cloud Files API (Coming Soon)
-- Lightroom Photos API (Coming Soon)
-- Creative Cloud Libraries API (Coming Soon)
-
-
-### Creative Tools
-
-- Image Editor UI
-- Color UI (Coming Soon)
+- Creative Cloud Files API
+- Lightroom Photos API
+- Creative Cloud Libraries API
 
 
 ### Creative Cloud Workflows
 
 - Send To Desktop API
-- Behance Publish UI (Coming Soon)
+- Behance Publish UI
 
 
 ### Frameworks
