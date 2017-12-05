@@ -1,8 +1,7 @@
 # Android: Getting Started Samples
 
-This contains Getting Started sample apps to accompany the Android developer guides on [creativesdk.com](http://creativesdk.com).
+This contains Getting Started sample apps to accompany the Android developer guides on [Adobe I/O](https://www.adobe.io/apis/creativecloud/creativesdk.html).
 
-Stay tuned for updates as we build out this library of samples!
 
 ### Contents
 
@@ -40,18 +39,15 @@ Stay tuned for updates as we build out this library of samples!
     1. This class is gitignored so you can avoid exposing your keys on GitHub
 1. Sync your Gradle files
 1. Run the app
-1. See the component's `guide` directory to learn more about the component (e.g., `send-to-desktop-api/guide`)
+1. See the component guides on [Adobe I/O](https://www.adobe.io/apis/creativecloud/creativesdk.html) to learn more about the components
 
 <a name="resources"></a>
 ## More resources for the Creative SDK
 
 ### Developer portal
 
-[Visit our Android developer portal](https://creativesdk.adobe.com/docs/android/#/index.html) for component guides, class references, and more.
+[Visit Adobe I/O](https://www.adobe.io/apis/creativecloud/creativesdk.html) for component guides, class references, and more.
 
-### Blog
-
-We have all kinds of Android content on our blog that explores deeper aspects of the Creative SDK. Have a look at [our Android category on blog.creativesdk.com](https://blog.creativesdk.com/category/android/).
 
 <a name="contributing"></a>
 ## Contributing to this repo
