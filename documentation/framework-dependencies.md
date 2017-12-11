@@ -17,7 +17,7 @@ Below is a table that contains all of the framework dependencies for each featur
 |Creative Cloud Libraries API	  |`com.adobe.creativesdk.foundation:assetcore:0.9.2006-5`	|
 |Lightroom Photos API   		    |`com.adobe.creativesdk.foundation:assetcore:0.9.2006-5`	|
 |SendToDesktop API   			      |`com.adobe.creativesdk.foundation:assetcore:0.9.2006-5`	|
-|TypeKit UI Component			      |`com.adobe.creativesdk:typekit:0.9.2006-5`				        |
+|Typekit UI Component			      |`com.adobe.creativesdk:typekit:0.9.2006-5`				        |
 |**User Auth UI Component\*\***	|`com.adobe.creativesdk.foundation:auth:0.9.2006-5`		    |
 
 _\***Note:** Client Auth is required for all apps using the Creative SDK._

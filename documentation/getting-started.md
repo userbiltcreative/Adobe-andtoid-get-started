@@ -290,7 +290,7 @@ You can learn more in the Creative SDK framework guides:
 
 - User Auth UI
 - Asset Browser UI
-- TypeKit UI
+- Typekit UI
 - Creative Cloud Files API
 - Lightroom Photos API
 - Creative Cloud Libraries API
